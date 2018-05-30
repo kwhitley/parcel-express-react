@@ -25,7 +25,7 @@ app.use(express.static(staticPath));
 
 app.get('/test', function (req, res) {
   return res.json({
-    foo: 'baz',
+    foo: 'bar',
     mode: "production",
     production: PRODUCTION
   });
