@@ -1,0 +1,12 @@
+{
+  "presets": ["react", "env"],
+  "plugins": [
+    "transform-class-properties",
+    "transform-runtime",
+    "transform-object-rest-spread"],
+  "env": {
+    "development": {
+      "plugins": []
+    }
+  }
+}

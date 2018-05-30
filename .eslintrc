@@ -1,0 +1,18 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "max-len": 1,
+    "import/prefer-default-export": 0,
+    "react/forbid-prop-types": 0,
+    "react/no-typos": 0,
+    "no-confusing-arrow": 1,
+    "no-underscore-dangle": 1
+  },
+  "env": {
+      "browser": true,
+      "node": true,
+      "mocha": true,
+      "es6": true
+  }
+}
