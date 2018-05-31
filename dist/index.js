@@ -33,9 +33,7 @@ var dependencies = {
 	"body-parser": "^1.18.3",
 	compression: "^1.7.2",
 	dotenv: "^5.0.1",
-	express: "^4.16.3",
-	react: "^16.4.0",
-	"react-dom": "^16.4.0"
+	express: "^4.16.3"
 };
 var devDependencies = {
 	"babel-cli": "^6.26.0",
@@ -48,6 +46,8 @@ var devDependencies = {
 	"node-sass": "^4.9.0",
 	nodemon: "^1.17.5",
 	parcel: "^1.8.1",
+	react: "^16.4.0",
+	"react-dom": "^16.4.0",
 	"react-hot-loader": "^4.2.0",
 	rollup: "^0.59.4",
 	"rollup-plugin-babel": "^3.0.4",
@@ -68,27 +68,18 @@ var pkg = {
 	devDependencies: devDependencies
 };
 
+// load .env using dotenv first
+
+// instantiate express
 var app = express();
 var PRODUCTION = "production" === 'production';
-
-var envClean = function envClean(env) {
-  return Object.keys(env).filter(function (k) {
-    return !k.startsWith('npm_');
-  }).reduce(function (a, k) {
-    a[k] = env[k];
-
-    return a;
-  }, {});
-};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(compression());
 
 // static serving from /dist/client
-var staticPath = APP_ROOT + '/dist/client';
-app.use(express.static(staticPath));
-console.log('Serving static files from ' + staticPath);
+app.use(express.static(APP_ROOT + '/dist/client'));
 
 // example API entry
 app.get('/test', function (req, res) {
@@ -96,7 +87,6 @@ app.get('/test', function (req, res) {
     foo: 'bar',
     mode: "production",
     port: process.env.PORT,
-    env: envClean(process.env),
     production: PRODUCTION
   });
 });
