@@ -8,7 +8,7 @@ let pkg = require('./package.json')
 let external = Object.keys(pkg.dependencies)
 
 export default {
-  entry: './server/index.js',
+  input: './server/index.js',
   plugins: [
     json(),
     resolve({
@@ -29,9 +29,9 @@ export default {
     replace({ 'process.env.NODE_ENV': JSON.stringify('production') })
   ],
   external,
-  targets: [
+  output: [
     {
-      dest: './dist/index.js',
+      file: './dist/index.js',
       format: 'cjs',
       sourceMap: true
     }

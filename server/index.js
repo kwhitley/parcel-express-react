@@ -2,7 +2,6 @@ import {} from './env';
 import express from 'express';
 import bodyParser from 'body-parser';
 import compression from 'compression';
-import path from 'path';
 import pkg from '../package.json';
 import APP_ROOT from 'app-root-path';
 

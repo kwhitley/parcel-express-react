@@ -6,7 +6,6 @@ var dotenv = _interopDefault(require('dotenv'));
 var express = _interopDefault(require('express'));
 var bodyParser = _interopDefault(require('body-parser'));
 var compression = _interopDefault(require('compression'));
-require('path');
 var APP_ROOT = _interopDefault(require('app-root-path'));
 
 dotenv.config({ silent: true });
@@ -22,10 +21,9 @@ var scripts = {
 	"dev:server": "nodemon --watch ./server --exec babel-node ./server/index.js",
 	"build:client": "parcel build client/index.html --out-dir dist/client",
 	"build:server": "rollup -c",
-	prebuild: "npm run clean",
+	prebuild: "rm -rf dist",
 	build: "npm run build:client && npm run build:server",
 	"build:start": "npm run build && npm start",
-	clean: "rm -rf dist",
 	dev: "npm run dev:server & npm run dev:client"
 };
 var author = "";
