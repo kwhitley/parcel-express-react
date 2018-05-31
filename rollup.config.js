@@ -3,7 +3,6 @@ import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-// import eslint from 'rollup-plugin-eslint';
 
 let pkg = require('./package.json')
 let external = Object.keys(pkg.dependencies)
@@ -16,12 +15,6 @@ export default {
       module: true,
       preferBuiltins: false
     }),
-    // eslint({
-    //   exclude: [
-    //     'node_modules/**',
-    //     'package.json'
-    //   ]
-    // }),
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
@@ -38,7 +31,7 @@ export default {
   external,
   targets: [
     {
-      dest: './dist/server.js',
+      dest: './dist/index.js',
       format: 'cjs',
       sourceMap: true
     }

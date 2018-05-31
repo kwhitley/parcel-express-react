@@ -4,19 +4,14 @@ body {
   font-weight: lighter;
   height: 100%;
   width: 100%;
-  position: relative;
-
-  &:before {
+  position: relative; }
+  body:before {
     content: '';
     z-index: -1;
     position: absolute;
     height: 100%;
     width: 100%;
-    opacity: 0.2;
-    // background-image: url('../images/enlist.jpg');
-  }
-}
+    opacity: 0.2; }
 
 ul {
-  list-style-type: none;
-}
+  list-style-type: none; }
