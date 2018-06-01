@@ -1,5 +1,35 @@
 import { Map, List, fromJS } from 'immutable';
 import { automap } from './redux-automap';
+import { createSelector } from 'reselect';
+
+export const namespace = 'list';
+
+const getItems = state => state.get('items');
+const getNumItems = state => state.get('items').size;
+const getHalfItems = (items, number) => items.slice(0, Math.floor(number / 2));
+
+const getSortedItems = createSelector(
+  [ getItems ], (items) => {
+    return items.sort((a, b) => {
+      a = a.get('name');
+      b = b.get('name');
+
+      return a < b ? -1 : (a > b ? 1 : 0);
+    }).reverse();
+  }
+);
+
+const getHalfItemsUnsorted = createSelector(
+  [ getItems, getNumItems ], getHalfItems
+);
+
+const getHalfItemsSorted = createSelector(
+  [ getSortedItems, getNumItems ], getHalfItems
+);
+
+export const selectors = {
+  getItems, getNumItems, getSortedItems, getHalfItemsUnsorted, getHalfItemsSorted
+};
 
 // optional declaration if you want to expose constants
 const constants = {
@@ -37,4 +67,4 @@ export const actionReducers = [
   }
 ];
 
-export default automap('list', { actionReducers, initialState, constants });
+export default automap({ namespace, actionReducers, initialState, constants, selectors, foo: 'bar' });

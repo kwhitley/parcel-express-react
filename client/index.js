@@ -2,8 +2,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import { hot } from 'react-hot-loader';
 
-import Menu from './components/Menu';
+import { combineReducers } from 'redux-immutable';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import mergedReducers from './state';
+import { ConnectedMenu } from './components/Menu';
 import imageURL from './images/storm-trooper.png';
+import list from './state/list';
+
+const rootReducer = combineReducers(mergedReducers);
+const store = createStore(rootReducer);
 
 import 'semantic-ui-css/semantic.min.css';
 
@@ -18,11 +27,14 @@ if (module.hot) {
   App = hot(module)(App);
 }
 
-render(<App name="R34ct App">
-    <Menu />
-    {/*<img src
-    ={imageURL} width="50" height="50" />*/}
-  </App>,
+render(
+  <Provider store={store}>
+    <App name="R34ct App">
+      <ConnectedMenu />
+      {/*<img src
+      ={imageURL} width="50" height="50" />*/}
+    </App>
+  </Provider>,
   document.getElementById('app'));
 
 fetch('/test')
