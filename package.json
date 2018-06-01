@@ -13,7 +13,8 @@
     "prebuild": "rm -rf dist",
     "build": "npm run build:client && npm run build:server",
     "build:start": "npm run build && npm start",
-    "dev": "npm run dev:server & npm run dev:client"
+    "dev": "npm run dev:server & npm run dev:client",
+    "sandbox": "nodemon --watch ./client --exec babel-node ./client/state/demo.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +23,8 @@
     "body-parser": "^1.18.3",
     "compression": "^1.7.2",
     "dotenv": "^5.0.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "immutable": "^3.8.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -38,6 +40,10 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-hot-loader": "^4.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-form": "^7.3.0",
+    "redux-immutable": "^4.0.0",
     "rollup": "^0.59.4",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.3",

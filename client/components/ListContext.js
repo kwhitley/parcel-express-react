@@ -11,16 +11,15 @@ export class ListProvider extends React.Component {
       { id: 2, name: 'bar' },
       { id: 3, name: 'baz' },
       { id: 4, name: 'cat' },
-    ],
-    nextID: 5
+    ]
   }
 
   addItem = () => {
-    let { items, nextID } = this.state;
+    let { items } = this.state;
+    let nextID = (Math.max(0, ...items.map(i => i.id))) + 1;
     console.log('adding item');
     this.setState({
-      items: [...items, { id: nextID, name: 'new item' }],
-      nextID: nextID + 1
+      items: [...items, { id: nextID, name: 'new item' }]
     });
   }
 
@@ -32,13 +31,10 @@ export class ListProvider extends React.Component {
   }
 
   render() {
+    console.log('render')
     return (
       <ListContext.Provider
-        value={{
-          items: this.state.items,
-          addItem: this.addItem,
-          removeItem: this.removeItem,
-        }}>
+        value={ Object.assign(this.state, this) }>
         { this.props.children }
       </ListContext.Provider>
     )
