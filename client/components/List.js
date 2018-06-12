@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button, Divider } from 'semantic-ui-react';
+import { Button, Divider, Input } from 'semantic-ui-react';
 import Item from './Item';
+import AddItem from './AddItem';
 
 export default ({ items = [], addItem, removeItem }) => {
   console.log('List:addItem', addItem);
   return (
     <React.Fragment>
-      <Button fluid onClick={() => addItem('new item')}>Add Item</Button>
+      <AddItem addItem={addItem} />
       <Divider horizontal>{ items.size } Items</Divider>
       <ul>
         {
