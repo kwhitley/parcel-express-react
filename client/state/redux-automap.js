@@ -1,6 +1,6 @@
 // automap(namespace, { actionReducers, initialState }) - returns individual mapped actions/reducers/etc
 export const automap = function(config = {}) {
-  const { namespace, actionReducers = [], initialState = {} } = config;
+  const { namespace, actionReducers = [], initialState = {}, selectors = {} } = config;
   const findKey = (item) => (finder) => Object.keys(item).find(finder);
   const findAction = (key) => key !== 'reducer' && key !== 'type';
 
@@ -33,7 +33,17 @@ export const automap = function(config = {}) {
     return actionReducer && actionReducer(state, action) || state;
   };
 
-  return Object.assign({}, config, { namespace, actions, reducers, reducer });
+  // remap selectors to namespace
+  let namespacedSelectors = {}
+
+  for (let selectorKey in selectors) {
+    let selector = selectors[selectorKey];
+    namespacedSelectors[selectorKey] = state => selector(state.get(namespace));
+  }
+
+  selectors.namespaced = namespacedSelectors;
+
+  return Object.assign({}, config, { namespace, actions, reducers, selectors, reducer });
 }
 
 // merge([ map1, map2, ... ]) - maps reducers to their namespace for easy inclusion into store

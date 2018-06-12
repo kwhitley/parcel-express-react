@@ -24,7 +24,8 @@
     "compression": "^1.7.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "redux-automap": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

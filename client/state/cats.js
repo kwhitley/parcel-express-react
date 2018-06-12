@@ -1,5 +1,5 @@
 import { Map, List, fromJS } from 'immutable';
-import { automap } from './redux-automap';
+import { automap } from 'redux-automap';
 import { createSelector } from 'reselect';
 
 export const namespace = 'cats';

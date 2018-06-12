@@ -11,8 +11,15 @@ import { ConnectedMenu } from './components/Menu';
 import imageURL from './images/storm-trooper.png';
 import list from './state/list';
 
+console.log('mergedReducers', mergedReducers);
+
 const rootReducer = combineReducers(mergedReducers);
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+console.log('store initial state', store.getState());
 
 import 'semantic-ui-css/semantic.min.css';
 

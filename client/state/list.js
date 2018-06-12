@@ -1,5 +1,5 @@
 import { Map, List, fromJS } from 'immutable';
-import { automap } from './redux-automap';
+import { automap } from 'redux-automap';
 import { createSelector } from 'reselect';
 
 export const namespace = 'list';
@@ -8,8 +8,8 @@ const getItems = state => state.get('items');
 const getNumItems = state => state.get('items').size;
 const getHalfItems = (items, number) => items.slice(0, Math.floor(number / 2));
 
-const getSortedItems = createSelector(
-  [ getItems ], (items) => {
+const getItemsSorted = createSelector(
+  [ getItems ], items => {
     return items.sort((a, b) => {
       a = a.get('name');
       b = b.get('name');
@@ -24,11 +24,11 @@ const getHalfItemsUnsorted = createSelector(
 );
 
 const getHalfItemsSorted = createSelector(
-  [ getSortedItems, getNumItems ], getHalfItems
+  [ getItemsSorted, getNumItems ], getHalfItems
 );
 
 export const selectors = {
-  getItems, getNumItems, getSortedItems, getHalfItemsUnsorted, getHalfItemsSorted
+  getItems, getNumItems, getItemsSorted, getHalfItemsUnsorted, getHalfItemsSorted
 };
 
 // optional declaration if you want to expose constants
@@ -44,6 +44,9 @@ export const initialState = fromJS({
     { id: 2, name: 'bar' },
     { id: 3, name: 'baz' },
     { id: 4, name: 'cat' },
+    { id: 5, name: 'miffles' },
+    { id: 6, name: 'vlad' },
+    { id: 7, name: 'baxter' },
   ]
 });
 
@@ -53,7 +56,7 @@ export const actionReducers = [
     type: constants.ADD_ITEM,
     addItem: (name = 'new item') => ({ type: constants.ADD_ITEM, name }),
     reducer: (state, action) => {
-      let nextID = state.get('items').maxBy(i => i.id).get('id') + 1;
+      let nextID = state.get('items').maxBy(i => i.get('id')).get('id') + 1;
 
       return state.update('items', items => items.push(Map({ id: nextID, name: action.name })));
     }

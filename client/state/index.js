@@ -1,4 +1,4 @@
-import { merge } from './redux-automap';
+import { merge } from 'redux-automap';
 import list from './list';
 import cats from './cats';
 

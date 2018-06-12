@@ -3,15 +3,25 @@ import { Grid } from 'semantic-ui-react';
 import List from './List';
 import { ListProvider } from './ListContext';
 import { connect } from 'react-redux';
-import { selectors } from '../state/list';
+import list from '../state/list';
 
-export const Menu = ({ items }) =>
-  <List items={items} />
+const { addItem, removeItem } = list.actions;
+console.log('addItem', addItem);
+console.log('removeItem', removeItem);
+
+export const Menu = ({ items, ...actions }) => {
+  return (
+    <List items={items} {...actions} />
+  )
+}
 
 const mapStateToProps = state => ({
-  items: selectors.getHalfItemsSorted(state)
+  items: list.selectors.namespaced.getItemsSorted(state)
 });
 
-export const ConnectedMenu = connect(mapStateToProps)(Menu);
+export const ConnectedMenu = connect(mapStateToProps, {
+  addItem,
+  removeItem
+})(Menu);
 
 export default Menu;
