@@ -7,7 +7,7 @@ export default ({ item, removeItem }) =>
     <Table.Cell width={1}>
       <Button circular icon="trash" fluid size="mini" onClick={() => removeItem(item.id)} />
     </Table.Cell>
-    <Table.Cell>{ item.get('id') }</Table.Cell>
-    <Table.Cell>{ item.get('name') }</Table.Cell>
-    <Table.Cell>created { humanize(new Date - item.get('date'), { round: true }) } ago</Table.Cell>
+    <Table.Cell>{ item.id }</Table.Cell>
+    <Table.Cell>{ item.name }</Table.Cell>
+    <Table.Cell>created { humanize(new Date - item.date, { round: true }) } ago</Table.Cell>
   </Table.Row>

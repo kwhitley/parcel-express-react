@@ -22,9 +22,9 @@ export default ({ items = [], addItem, removeItem }) => {
         <Table.Body>
           {
             items.map(item => <Item
-                                key={item.get('id')}
+                                key={item.id}
                                 item={item}
-                                removeItem={() => removeItem(item.get('id'))}
+                                removeItem={() => removeItem(item.id)}
                                  />
                       )
           }

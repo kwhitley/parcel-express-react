@@ -4,6 +4,7 @@ import List from './List';
 import { ListProvider } from './ListContext';
 import { connect } from 'react-redux';
 import list from '../state/list';
+import { toJS } from './toJS';
 
 const { addItem, removeItem } = list.actions;
 console.log('addItem', addItem);
@@ -22,6 +23,6 @@ const mapStateToProps = state => ({
 export const ConnectedMenu = connect(mapStateToProps, {
   addItem,
   removeItem
-})(Menu);
+})(toJS(Menu));
 
 export default Menu;
