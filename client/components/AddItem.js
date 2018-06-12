@@ -31,7 +31,7 @@ class AddItem extends React.Component {
         <Input
           fluid
           placeholder="New Item"
-          action={{ labelPosition: 'right', icon: 'plus', content: 'Add Item', onClick: this.addItem }}
+          action={{ labelPosition: 'right', icon: 'plus', content: 'Add Item' }}
           actionPosition='left'
           onChange={this.update}
           value={this.state.value}

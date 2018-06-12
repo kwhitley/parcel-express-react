@@ -25,6 +25,7 @@
     "compression": "^1.7.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "humanize-duration": "^3.14.0",
     "immutable": "^3.8.2",
     "react-dom": "^16.4.0",
     "redux-automap": "^1.2.0"
