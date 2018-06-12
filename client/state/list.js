@@ -31,32 +31,30 @@ export const selectors = {
   getItems, getNumItems, getItemsSorted, getHalfItemsUnsorted, getHalfItemsSorted
 };
 
-const Entry = new Record({ id: undefined, name: 'new item', date: new Date });
-
-// optional declaration if you want to expose constants
-const constants = {
-  ADD_ITEM: '/LIST/ADD_ITEM',
-  REMOVE_ITEM: '/LIST/REMOVE_ITEM',
-};
+const Entry = new Record({
+  id: undefined,
+  name: 'new item',
+  date: new Date,
+  isActive: false
+});
 
 // initial state for reducer
 export const initialState = fromJS({
   items: [
-    { id: 1, name: 'foo', date: new Date },
-    { id: 2, name: 'bar', date: new Date },
-    { id: 3, name: 'baz', date: new Date },
-    { id: 4, name: 'cat', date: new Date },
-    { id: 5, name: 'miffles', date: new Date },
-    { id: 6, name: 'vlad', date: new Date },
-    { id: 7, name: 'baxter', date: new Date },
+    { id: 1, name: 'foo', date: new Date, isActive: true },
+    { id: 2, name: 'bar', date: new Date, isActive: true },
+    { id: 3, name: 'baz', date: new Date, isActive: true },
+    { id: 4, name: 'cat', date: new Date, isActive: false },
+    { id: 5, name: 'miffles', date: new Date, isActive: false },
+    { id: 6, name: 'vlad', date: new Date, isActive: true },
+    { id: 7, name: 'baxter', date: new Date, isActive: true },
   ]
 });
 
 // define all action/reducer pairs here... add "type" attributes for
 export const actionReducers = [
   {
-    type: constants.ADD_ITEM,
-    addItem: (name = 'new item') => ({ type: constants.ADD_ITEM, name }),
+    addItem: (name = 'new item') => ({ type: 'list/ADD_ITEM', name }),
     reducer: (state, action) => {
       let nextID = state.get('items').maxBy(i => i.get('id')).get('id') + 1;
 
@@ -68,12 +66,16 @@ export const actionReducers = [
     }
   },
   {
+    toggleIsActive: (id) => ({ type:  'list/TOGGLE_ITEM_IS_ACTIVE', id }),
+    reducer: (state, action) => state.update('items', items => items.map(item => item.get('id') === action.id ? item.update('isActive', active => !active) : item))
+  },
+  {
     // type: constants.REMOVE_ITEM,
-    removeItem: (id) => ({ type: constants.REMOVE_ITEM, id }),
+    removeItem: (id) => ({ type:  'list/REMOVE_ITEM', id }),
     reducer: (state, action) => {
       return state.update('items', items => items.filter(i => i.get('id') !== action.id));
     }
   }
 ];
 
-export default automap({ namespace, actionReducers, initialState, constants, selectors, foo: 'bar' });
+export default automap({ namespace, actionReducers, initialState, selectors, foo: 'bar' });

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import list from '../state/list';
 import { toJS } from './toJS';
 
-const { addItem, removeItem } = list.actions;
+const { addItem, removeItem, toggleIsActive } = list.actions;
 console.log('addItem', addItem);
 console.log('removeItem', removeItem);
 
@@ -17,12 +17,13 @@ export const Menu = ({ items, ...actions }) => {
 }
 
 const mapStateToProps = state => ({
-  items: list.selectors.namespaced.getItemsSorted(state)
+  items: list.selectors.namespaced.getItems(state)
 });
 
 export const ConnectedMenu = connect(mapStateToProps, {
   addItem,
-  removeItem
+  removeItem,
+  toggleIsActive
 })(toJS(Menu));
 
 export default Menu;
