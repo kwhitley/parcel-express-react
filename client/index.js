@@ -1,3 +1,5 @@
+import 'semantic-ui-css/semantic.min.css';
+
 import React from 'react';
 import { render } from 'react-dom';
 import { hot } from 'react-hot-loader';
@@ -21,7 +23,7 @@ const store = createStore(
 
 console.log('store initial state', store.getState());
 
-import 'semantic-ui-css/semantic.min.css';
+
 
 let App = ({ name, children }) =>
   <div>

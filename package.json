@@ -25,6 +25,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "immutable": "^3.8.2",
+    "react-dom": "^16.4.0",
     "redux-automap": "^1.2.0"
   },
   "devDependencies": {
@@ -39,11 +40,9 @@
     "nodemon": "^1.17.5",
     "parcel": "^1.8.1",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0",
     "react-hot-loader": "^4.2.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-form": "^7.3.0",
     "redux-immutable": "^4.0.0",
     "reselect": "^3.0.1",
     "rollup": "^0.59.4",

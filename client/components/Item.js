@@ -3,6 +3,6 @@ import { Button } from 'semantic-ui-react';
 
 export default ({ item, removeItem }) =>
   <li>
-    { item.get('name') }
-    <Button icon="trash outline" onClick={() => removeItem(item.id)}></Button>
+    <Button circular size="mini" icon="trash" onClick={() => removeItem(item.id)}></Button>
+    { item.get('name') }:{ item.get('id') }
   </li>

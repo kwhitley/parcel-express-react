@@ -12,6 +12,12 @@ body {
     height: 100%;
     width: 100%;
     opacity: 0.2; }
+  body #app {
+    padding: 1em; }
 
 ul {
-  list-style-type: none; }
+  list-style-type: none;
+  padding: 0; }
+
+li {
+  margin-bottom: 0.5em; }

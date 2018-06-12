@@ -15,8 +15,17 @@ body {
     opacity: 0.2;
     // background-image: url('../images/enlist.jpg');
   }
+
+  #app {
+    padding: 1em;
+  }
 }
 
 ul {
   list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.5em;
 }

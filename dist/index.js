@@ -24,7 +24,8 @@ var scripts = {
 	prebuild: "rm -rf dist",
 	build: "npm run build:client && npm run build:server",
 	"build:start": "npm run build && npm start",
-	dev: "npm run dev:server & npm run dev:client"
+	dev: "npm run dev:server & npm run dev:client",
+	sandbox: "nodemon --watch ./client --exec babel-node ./client/state/demo.js"
 };
 var author = "";
 var license = "ISC";
@@ -33,7 +34,10 @@ var dependencies = {
 	"body-parser": "^1.18.3",
 	compression: "^1.7.2",
 	dotenv: "^5.0.1",
-	express: "^4.16.3"
+	express: "^4.16.3",
+	immutable: "^3.8.2",
+	"react-dom": "^16.4.0",
+	"redux-automap": "^1.2.0"
 };
 var devDependencies = {
 	"babel-cli": "^6.26.0",
@@ -47,14 +51,19 @@ var devDependencies = {
 	nodemon: "^1.17.5",
 	parcel: "^1.8.1",
 	react: "^16.4.0",
-	"react-dom": "^16.4.0",
 	"react-hot-loader": "^4.2.0",
+	"react-redux": "^5.0.7",
+	redux: "^4.0.0",
+	"redux-immutable": "^4.0.0",
+	reselect: "^3.0.1",
 	rollup: "^0.59.4",
 	"rollup-plugin-babel": "^3.0.4",
 	"rollup-plugin-commonjs": "^9.1.3",
 	"rollup-plugin-json": "^3.0.0",
 	"rollup-plugin-node-resolve": "^3.3.0",
-	"rollup-plugin-replace": "^2.0.0"
+	"rollup-plugin-replace": "^2.0.0",
+	"semantic-ui-css": "^2.3.1",
+	"semantic-ui-react": "^0.80.2"
 };
 var pkg = {
 	name: name,
