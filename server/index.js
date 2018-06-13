@@ -1,5 +1,5 @@
 // load .env using dotenv first
-import {} from './env';
+import env from 'env-autoload';
 
 // include other main deps
 import express from 'express';
@@ -20,15 +20,18 @@ app.use(compression());
 app.use(express.static(APP_ROOT + '/dist/client'));
 
 // example API entry
-app.get('/test', (req, res) => res.json({
-  foo: 'bar',
-  mode: process.env.NODE_ENV,
-  port: process.env.PORT,
-  production: PRODUCTION
-}));
+app.get('/test', (req, res) =>
+  res.json({
+    foo: 'bar',
+    mode: process.env.NODE_ENV,
+    port: process.env.PORT,
+    test: process.env.TEST,
+    production: PRODUCTION
+  })
+);
 
 // json import support
-app.get('/package.json', (req, res) => res.json(pkg));
+app.get('/package.json', (req, res) => setTimeout(() => res.json(pkg), 2000));
 
 const serverPort = process.env.PORT || 3000;
 app.listen(serverPort);

@@ -7,11 +7,14 @@ import { toJS } from './toJS';
 
 const { loadPackageInfo, loadPackageInfoSuccess } = api.actions;
 
-export const Package = ({ pkg, deps, loadPackageInfo }) => {
+export const Package = ({ pkg, deps, timesLoaded, loadPackageInfo }) => {
+  console.log('pkg', pkg)
   return (
     <div className="package-loader">
       <Header>Package</Header>
-      <Button fluid disabled={pkg.isLoading} onClick={loadPackageInfo}>Load Package</Button>
+      <Button fluid disabled={pkg.isLoading} onClick={loadPackageInfo} loading={pkg.isLoading}>
+        { deps && Object.keys(deps).length ? `Reload Package (loaded ${timesLoaded} times)` : 'Load Package' }
+      </Button>
       <Grid columns={3} divided>
         <Grid.Row>
           <Grid.Column>
@@ -30,8 +33,10 @@ export const Package = ({ pkg, deps, loadPackageInfo }) => {
 }
 
 const mapStateToProps = state => ({
-  pkg: state.getIn(['api', 'package']),
-  deps: state.getIn(['api', 'package', 'data', 'dependencies']),
+  pkg: api.selectors.namespaced.getPackage(state),
+  deps: api.selectors.namespaced.getDependencies(state),
+  devDeps: api.selectors.namespaced.getDevDependencies(state),
+  timesLoaded: api.selectors.namespaced.getTimesLoaded(state),
 });
 
 export const ConnectedPackage = connect(mapStateToProps, {

@@ -10,6 +10,13 @@ export const namespace = 'api';
 //   return axios.get('/package.json');
 // }
 
+const selectors = {
+  getPackage: state => state.getIn(['package']),
+  getTimesLoaded: state => state.get('timesLoaded'),
+  getDependencies: state => state.getIn(['package', 'data', 'dependencies']),
+  getDevDependencies: state => state.getIn(['package', 'data', 'devDependencies']),
+};
+
 const Resource = Record({
   isLoading: false,
   success: undefined,
@@ -19,7 +26,8 @@ const Resource = Record({
 
 // initial state for reducer
 export const initialState = fromJS({
-  package: new Resource
+  package: new Resource,
+  timesLoaded: 0,
 });
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
@@ -30,10 +38,8 @@ function *watcherSaga() {
 function *fetchPackageInfo () {
   console.log('fetchPackageInfo saga triggered');
   try {
-    const response = yield call(() => axios.get('/package.json'));
-    console.log('response', response);
-    // yield delay(1000);
-    yield put({ type: "api/LOAD_PACKAGE_INFO_SUCCESS", data: fromJS(response.data) });
+    const data = yield call(() => axios.get('/package.json').then(r => fromJS(r.data)));
+    yield put({ type: "api/LOAD_PACKAGE_INFO_SUCCESS", data });
   } catch (error) {
     console.log('error', error);
     yield put({ type: "api/LOAD_PACKAGE_INFO_ERROR", error: error.message });
@@ -50,11 +56,13 @@ const sagas = {
 export const actionReducers = [
   {
     loadPackageInfo: () => ({ type: 'api/LOAD_PACKAGE_INFO' }),
-    reducer: state => state.set('package', new Resource({ isLoading: true }))
+    reducer: state => state.set('package', new Resource({ isLoading: true, data: state.getIn(['package', 'data']) }))
   },
   {
     loadPackageInfoSuccess: (data) => ({ type: 'api/LOAD_PACKAGE_INFO_SUCCESS', data }),
-    reducer: (state, action) => state.set('package', new Resource({ isLoading: false, success: true, data: action.data }))
+    reducer: (state, action) => state
+                                  .set('package', new Resource({ isLoading: false, success: true, data: action.data }))
+                                  .update('timesLoaded', count => count + 1)
   },
   {
     loadPackageInfoError: (error) => ({ type: 'api/LOAD_PACKAGE_INFO_ERROR', error }),
@@ -62,4 +70,4 @@ export const actionReducers = [
   }
 ];
 
-export default automap({ sagas, namespace, actionReducers, initialState });
+export default automap({ sagas, namespace, actionReducers, initialState, selectors });
