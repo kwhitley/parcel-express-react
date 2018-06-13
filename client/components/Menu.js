@@ -7,8 +7,6 @@ import list from '../state/list';
 import { toJS } from './toJS';
 
 const { addItem, removeItem, toggleIsActive } = list.actions;
-console.log('addItem', addItem);
-console.log('removeItem', removeItem);
 
 export const Menu = ({ items, ...actions }) => {
   return (

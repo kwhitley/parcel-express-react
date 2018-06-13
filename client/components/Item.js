@@ -6,7 +6,13 @@ export default ({ item, removeItem, toggleIsActive }) => {
   return (
     <Table.Row>
       <Table.Cell width={1}>
-        <Button circular icon="trash" fluid size="mini" onClick={removeItem} />
+        <Button
+          circular
+          icon="trash"
+          fluid size="mini"
+          onClick={removeItem}
+          disabled={item.isActive}
+          />
       </Table.Cell>
       <Table.Cell>{ item.id }</Table.Cell>
       <Table.Cell>{ item.name }</Table.Cell>

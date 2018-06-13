@@ -1,0 +1,1 @@
+body{color:#222;font-family:sans-serif;font-weight:lighter;position:relative}body,body:before{height:100%;width:100%}body:before{content:"";z-index:-1;position:absolute;opacity:.2}body #app{padding:1em}ul{list-style-type:none;padding:0}li{margin-bottom:.5em}

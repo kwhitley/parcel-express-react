@@ -3,7 +3,9 @@
   "plugins": [
     "transform-class-properties",
     "transform-runtime",
-    "transform-object-rest-spread"],
+    "transform-object-rest-spread",
+    "transform-function-bind"
+  ],
   "env": {
     "development": {
       "plugins": ["react-hot-loader/babel"]

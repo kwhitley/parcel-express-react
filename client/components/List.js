@@ -8,7 +8,7 @@ export default ({ items = [], addItem, removeItem, toggleIsActive }) => {
   return (
     <React.Fragment>
       <AddItem addItem={addItem} />
-      <Divider horizontal>{ items.size } Items</Divider>
+      <Divider horizontal>{ items.length } Items</Divider>
       <Table compact celled definition>
         <Table.Header>
           <Table.Row>
