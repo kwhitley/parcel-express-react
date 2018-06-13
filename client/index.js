@@ -5,22 +5,31 @@ import { render } from 'react-dom';
 import { hot } from 'react-hot-loader';
 
 import { combineReducers } from 'redux-immutable';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga'
 
 import mergedReducers from './state';
 import { ConnectedMenu } from './components/Menu';
 import { ConnectedPackage } from './components/Package';
 import imageURL from './images/storm-trooper.png';
-import list from './state/list';
+import api from './state/api';
 
 console.log('mergedReducers', mergedReducers);
+console.log('api.sagas', api.sagas);
 
+const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers(mergedReducers);
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  compose(
+    applyMiddleware(sagaMiddleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  )
 );
+
+// register sagas
+sagaMiddleware.run(api.sagas.watcherSaga);
 
 console.log('store initial state', store.getState());
 
