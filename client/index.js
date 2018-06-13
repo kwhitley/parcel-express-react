@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 
 import mergedReducers from './state';
 import { ConnectedMenu } from './components/Menu';
+import { ConnectedPackage } from './components/Package';
 import imageURL from './images/storm-trooper.png';
 import list from './state/list';
 
@@ -40,6 +41,7 @@ render(
   <Provider store={store}>
     <App name="R34ct App">
       <ConnectedMenu />
+      <ConnectedPackage />
       {/*<img src
       ={imageURL} width="50" height="50" />*/}
     </App>
