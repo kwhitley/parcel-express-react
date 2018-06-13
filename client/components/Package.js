@@ -4,6 +4,8 @@ import { Header, Button, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import api from '../state/api';
 import { toJS } from './toJS';
+import Dependencies from './Dependencies';
+import ErrorMessage from './ErrorMessage';
 
 const { loadPackageInfo, loadPackageInfoSuccess } = api.actions;
 
@@ -15,19 +17,8 @@ export const Package = ({ pkg, deps, timesLoaded, loadPackageInfo }) => {
       <Button fluid disabled={pkg.isLoading} onClick={loadPackageInfo} loading={pkg.isLoading}>
         { deps && Object.keys(deps).length ? `Reload Package (loaded ${timesLoaded} times)` : 'Load Package' }
       </Button>
-      <Grid columns={3} divided>
-        <Grid.Row>
-          <Grid.Column>
-            <ul>
-              {
-                deps && Object.keys(deps).map(k => (
-                  <li key={k}>{ k }: { deps[k] }</li>
-                ))
-              }
-            </ul>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      { deps && Object.keys(deps).length && <Dependencies deps={deps} /> }
+      { pkg.error && <ErrorMessage>{ pkg.error }</ErrorMessage> }
     </div>
   )
 }
