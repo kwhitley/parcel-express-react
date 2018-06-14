@@ -4,6 +4,7 @@ import List from './pages/List'
 import Package from './pages/Package'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Navigation from './Nav'
+import { hot } from 'react-hot-loader';
 
 
 const App = () => {
@@ -20,4 +21,4 @@ const App = () => {
   )
 }
 
-export default App
+export default hot(module)(App)

@@ -2,7 +2,6 @@ import 'semantic-ui-css/semantic.min.css'
 
 import React from 'react'
 import { render } from 'react-dom'
-import { hot } from 'react-hot-loader'
 
 import { combineReducers } from 'redux-immutable'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -49,16 +48,10 @@ sagaMiddleware.run(api.sagas.watcherSaga)
 
 console.log('store initial state', store.getState())
 
-const HotApp = module.hot ? hot(module)(App) : App
-
-if (module.hot) {
-  console.info('hot reloading enabled')
-}
-
 render(
   <Provider store={store}>
     <HashRouter>
-      <HotApp />
+      <App />
     </HashRouter>
   </Provider>,
   document.getElementById('app'))
