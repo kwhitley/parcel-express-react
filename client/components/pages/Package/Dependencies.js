@@ -3,14 +3,14 @@ import { Grid, Message } from 'semantic-ui-react'
 import List from './List'
 
 export default ({ deps, devDeps }) =>
-  <Message>
+  <Message positive>
     <Grid columns={2} divided>
       <Grid.Row>
         <Grid.Column>
-          <List name="Dependencies" items={deps} />
+          <List name="Dependencies" libs={deps} />
         </Grid.Column>
         <Grid.Column>
-          <List name="Dev. Dependencies" items={devDeps} />
+          <List name="Dev. Dependencies" libs={devDeps} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

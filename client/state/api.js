@@ -6,15 +6,24 @@ import { call, put, takeLatest, delay } from 'redux-saga/effects'
 
 export const namespace = 'api'
 
-// const fetchPackageInfo = () => {
-//   return axios.get('/package.json')
-// }
+const toDepsArray = deps => deps && Object
+                                      .entries(deps.toJS())
+                                      .map(i => ({ name: i[0], version: i[1] }))
+
+const getPackage = state => state.getIn(['package'])
+const getTimesLoaded = state => state.get('timesLoaded')
+const getDependencies = state => state.getIn(['package', 'data', 'dependencies'])
+const getDevDependencies = state => state.getIn(['package', 'data', 'devDependencies'])
+const getDependenciesAsArray = createSelector([ getDependencies ], toDepsArray)
+const getDevDependenciesAsArray = createSelector([ getDevDependencies ], toDepsArray)
 
 const selectors = {
-  getPackage: state => state.getIn(['package']),
-  getTimesLoaded: state => state.get('timesLoaded'),
-  getDependencies: state => state.getIn(['package', 'data', 'dependencies']),
-  getDevDependencies: state => state.getIn(['package', 'data', 'devDependencies']),
+  getPackage,
+  getTimesLoaded,
+  getDependencies,
+  getDevDependencies,
+  getDependenciesAsArray,
+  getDevDependenciesAsArray
 }
 
 const Resource = Record({

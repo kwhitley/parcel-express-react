@@ -4783,7 +4783,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^16.4.1:
+"react-dom@^15.0.0 || ^16.0.0":
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.1.tgz#7f8b0223b3a5fbe205116c56deb85de32685dad6"
   dependencies:
@@ -4869,7 +4869,7 @@ react-wrappers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-wrappers/-/react-wrappers-1.0.0.tgz#afe7c62db8b724b12f9e20d233ba795a5ad40ac4"
 
-react@^16.4.1:
+"react@^15.0.0 || ^16.0.0":
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
   dependencies:

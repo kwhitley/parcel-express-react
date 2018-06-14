@@ -14,14 +14,14 @@ export const Package = ({ pkg, deps, devDeps, timesLoaded, loadPackageInfo }) =>
     <Button fluid disabled={pkg.isLoading} onClick={loadPackageInfo} loading={pkg.isLoading}>
       { deps && Object.keys(deps).length ? `Reload Package (loaded ${timesLoaded} times)` : 'Load Package' }
     </Button>
-    { deps && Object.keys(deps).length && <Dependencies deps={deps} devDeps={devDeps} /> }
+    { deps && <Dependencies deps={deps} devDeps={devDeps} /> }
     { pkg.error && <ErrorMessage>{ pkg.error }</ErrorMessage> }
   </div>
 
 const mapStateToProps = state => ({
   pkg: api.getPackage(state),
-  deps: api.getDependencies(state),
-  devDeps: api.getDevDependencies(state),
+  deps: api.getDependenciesAsArray(state),
+  devDeps: api.getDevDependenciesAsArray(state),
   timesLoaded: api.getTimesLoaded(state),
 })
 
