@@ -82921,13 +82921,9 @@ var _default = function _default(_ref) {
   var name = _ref.name,
       libs = _ref.libs;
   return _react2.default.createElement(
-    _react2.default.Fragment,
+    'div',
     null,
-    _react2.default.createElement(
-      _semanticUiReact.Header,
-      null,
-      name
-    ),
+    _react2.default.createElement(_semanticUiReact.Statistic, { horizontal: true, label: name, value: libs.length }),
     _react2.default.createElement(
       _semanticUiReact.List,
       null,
@@ -85237,7 +85233,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59771' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60693' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

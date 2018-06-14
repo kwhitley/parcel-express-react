@@ -1,9 +1,9 @@
 import React from 'react'
-import { List, Header } from 'semantic-ui-react'
+import { List, Header, Statistic } from 'semantic-ui-react'
 
 export default ({ name, libs }) =>
-  <React.Fragment>
-    <Header>{ name }</Header>
+  <div>
+    <Statistic horizontal label={name} value={libs.length} />
     <List>
       {
         libs && libs.map(lib => (
@@ -11,4 +11,5 @@ export default ({ name, libs }) =>
         ))
       }
     </List>
-  </React.Fragment>
+  </div>
+

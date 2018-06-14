@@ -27,3 +27,6 @@ li {
   .pages > * {
     position: absolute;
     width: 100%; }
+
+.padded {
+  padding: 1em; }
