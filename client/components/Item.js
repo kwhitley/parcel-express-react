@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button, Icon, Table, Checkbox } from 'semantic-ui-react';
-import humanize from 'humanize-duration';
+import React from 'react'
+import { Button, Icon, Table, Checkbox } from 'semantic-ui-react'
+import humanize from 'humanize-duration'
 
 export default ({ item, removeItem, toggleIsActive }) => {
   return (

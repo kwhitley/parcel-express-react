@@ -1,10 +1,10 @@
-import { Map, List, fromJS } from 'immutable';
-import reduxHelper from './redux-helper';
+import { Map, List, fromJS } from 'immutable'
+import reduxHelper from './redux-helper'
 
 export const initialState = Map({
   name: 'Kevin',
   age: 38
-});
+})
 
 export const actionReducers = [
   {
@@ -13,8 +13,8 @@ export const actionReducers = [
   },
   {
     growOlder: () => ({ type: 'GROW_OLDER' }),
-    reducer: (state, action) => state.set('age', state.get('age') + 1);
+    reducer: (state, action) => state.set('age', state.get('age') + 1)
   }
-];
+]
 
-export default { actions, reducers, reducer } = reduxHelper(actionReducers, initialState);
+export default { actions, reducers, reducer } = reduxHelper(actionReducers, initialState)

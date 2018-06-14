@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux-immutable';
-import { createStore } from 'redux';
-import mergedReducers from './index';
-import list from './cats';
+import { combineReducers } from 'redux-immutable'
+import { createStore } from 'redux'
+import mergedReducers from './index'
+import list from './cats'
 
 const {
   getItems,
@@ -9,37 +9,37 @@ const {
   getSortedItems,
   getHalfItemsUnsorted,
   getHalfItemsSorted,
-} = list.selectors;
+} = list.selectors
 
-console.log('actions', list.actions);
-console.log('reducers', list.reducers);
-console.log('constants', list.constants);
+console.log('actions', list.actions)
+console.log('reducers', list.reducers)
+console.log('constants', list.constants)
 
-const rootReducer = combineReducers(mergedReducers);
-const store = createStore(rootReducer);
+const rootReducer = combineReducers(mergedReducers)
+const store = createStore(rootReducer)
 
 store.subscribe(() => {
-  console.log('NEW STATE >', store.getState());
-});
+  console.log('NEW STATE >', store.getState())
+})
 
-const createItem = list.actions.addItem('mittens');
-console.log('creating item >', createItem);
-store.dispatch(createItem);
+const createItem = list.actions.addItem('mittens')
+console.log('creating item >', createItem)
+store.dispatch(createItem)
 
-console.log('removing item');
-store.dispatch(list.actions.removeItem(1));
+console.log('removing item')
+store.dispatch(list.actions.removeItem(1))
 
-let state = store.getState();
+let state = store.getState()
 
-console.log('getItems > ', getItems(state));
-console.log('getNumItems > ', getNumItems(state));
-console.log('getSortedItems > ', getSortedItems(state));
-console.log('getHalfItemsSorted > ', getHalfItemsSorted(state));
-console.log('getHalfItemsUnsorted > ', getHalfItemsUnsorted(state));
+console.log('getItems > ', getItems(state))
+console.log('getNumItems > ', getNumItems(state))
+console.log('getSortedItems > ', getSortedItems(state))
+console.log('getHalfItemsSorted > ', getHalfItemsSorted(state))
+console.log('getHalfItemsUnsorted > ', getHalfItemsUnsorted(state))
 
-let sortedA = getSortedItems(state);
-let sortedB = getSortedItems(state);
+let sortedA = getSortedItems(state)
+let sortedB = getSortedItems(state)
 
-console.log('sorted equal?', sortedA === sortedB);
+console.log('sorted equal?', sortedA === sortedB)
 
-console.log('extra test... foo =', list.foo);
+console.log('extra test... foo =', list.foo)

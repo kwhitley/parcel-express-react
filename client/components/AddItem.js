@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Input, Form } from 'semantic-ui-react';
+import React from 'react'
+import { Button, Input, Form } from 'semantic-ui-react'
 
 class AddItem extends React.Component {
   state = {
@@ -13,9 +13,9 @@ class AddItem extends React.Component {
   }
 
   addItem() {
-    let itemName = this.state.value || 'new item';
-    this.props.addItem(itemName);
-    this.setState({ value: '' });
+    let itemName = this.state.value || 'new item'
+    this.props.addItem(itemName)
+    this.setState({ value: '' })
   }
 
   render() {
@@ -34,4 +34,4 @@ class AddItem extends React.Component {
   }
 }
 
-export default AddItem;
+export default AddItem

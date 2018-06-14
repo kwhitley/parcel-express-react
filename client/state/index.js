@@ -1,5 +1,5 @@
-import { merge } from 'redux-automap';
-import list from './list';
-import api from './api';
+import { merge } from 'redux-automap'
+import list from './list'
+import api from './api'
 
-export default merge([ list, api ]);
+export default merge([ list, api ])

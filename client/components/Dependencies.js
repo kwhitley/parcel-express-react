@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import React from 'react'
+import { Grid } from 'semantic-ui-react'
 
 export default ({ deps, devDeps }) =>
   <Grid columns={3} divided>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button, Divider, Input, Table, Transition } from 'semantic-ui-react';
-import Item from './Item';
-import AddItem from './AddItem';
+import React from 'react'
+import { Button, Divider, Input, Table, Transition } from 'semantic-ui-react'
+import Item from './Item'
+import AddItem from './AddItem'
 
 export default ({ items = [], addItem, removeItem, toggleIsActive }) =>
   <React.Fragment>

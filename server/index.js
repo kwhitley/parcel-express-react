@@ -1,23 +1,23 @@
 // load .env using dotenv first
-import env from 'env-autoload';
+import env from 'env-autoload'
 
 // include other main deps
-import express from 'express';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import pkg from '../package.json';
-import APP_ROOT from 'app-root-path';
+import express from 'express'
+import bodyParser from 'body-parser'
+import compression from 'compression'
+import pkg from '../package.json'
+import APP_ROOT from 'app-root-path'
 
 // instantiate express
-const app = express();
-const PRODUCTION = process.env.NODE_ENV === 'production';
+const app = express()
+const PRODUCTION = process.env.NODE_ENV === 'production'
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(compression());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(compression())
 
 // static serving from /dist/client
-app.use(express.static(APP_ROOT + '/dist/client'));
+app.use(express.static(APP_ROOT + '/dist/client'))
 
 // example API entry
 app.get('/test', (req, res) =>
@@ -28,11 +28,11 @@ app.get('/test', (req, res) =>
     test: process.env.TEST,
     production: PRODUCTION
   })
-);
+)
 
 // json import support
-app.get('/package.json', (req, res) => setTimeout(() => res.json(pkg), 2000));
+app.get('/package.json', (req, res) => setTimeout(() => res.json(pkg), 2000))
 
-const serverPort = process.env.PORT || 3000;
-app.listen(serverPort);
-console.log(`Express server @ http://localhost:${serverPort} (${PRODUCTION ? 'production' : 'development'})\n`);
+const serverPort = process.env.PORT || 3000
+app.listen(serverPort)
+console.log(`Express server @ http://localhost:${serverPort} (${PRODUCTION ? 'production' : 'development'})\n`)
