@@ -32,7 +32,8 @@ var dependencies = {
 	"body-parser": "^1.18.3",
 	compression: "^1.7.2",
 	"env-autoload": "^1.0.1",
-	express: "^4.16.3"
+	express: "^4.16.3",
+	"react-router-transition": "^1.2.1"
 };
 var devDependencies = {
 	axios: "^0.18.0",
@@ -56,6 +57,7 @@ var devDependencies = {
 	"react-hot-loader": "^4.3.2",
 	"react-redux": "^5.0.7",
 	"react-router-dom": "^4.3.1",
+	"react-transition-group": "^2.3.1",
 	"react-wrappers": "^1.0.0",
 	redux: "^4.0.0",
 	"redux-automap": "^1.3.1",
@@ -113,7 +115,7 @@ app.get('/test', function (req, res) {
 app.get('/package.json', function (req, res) {
   return setTimeout(function () {
     return res.json(pkg);
-  }, 2000);
+  }, 1000);
 });
 
 var serverPort = process.env.PORT || 3000;

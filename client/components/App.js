@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import List from './pages/List'
 import Package from './pages/Package'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition'
 import Navigation from './Nav'
-import { hot } from 'react-hot-loader';
-
+import { hot } from 'react-hot-loader'
 
 const App = () => {
   return (

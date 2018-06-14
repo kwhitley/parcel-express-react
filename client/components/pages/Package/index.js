@@ -8,13 +8,13 @@ import api from '../../../state/api'
 
 const { loadPackageInfo, loadPackageInfoSuccess } = api.actions
 
-export const Package = ({ pkg, deps, timesLoaded, loadPackageInfo }) =>
+export const Package = ({ pkg, deps, devDeps, timesLoaded, loadPackageInfo }) =>
   <div className="package-loader">
     <Header>Package</Header>
     <Button fluid disabled={pkg.isLoading} onClick={loadPackageInfo} loading={pkg.isLoading}>
       { deps && Object.keys(deps).length ? `Reload Package (loaded ${timesLoaded} times)` : 'Load Package' }
     </Button>
-    { deps && Object.keys(deps).length && <Dependencies deps={deps} /> }
+    { deps && Object.keys(deps).length && <Dependencies deps={deps} devDeps={devDeps} /> }
     { pkg.error && <ErrorMessage>{ pkg.error }</ErrorMessage> }
   </div>
 

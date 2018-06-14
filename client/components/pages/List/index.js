@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fromImmutable } from 'react-wrappers'
 import { Button, Divider, Input, Table, Transition } from 'semantic-ui-react'
+import { CSSTransition } from 'react-transition-group'
 import Item from './Item'
 import AddItem from './AddItem'
-import list from '../../../state/list';
+import list from '../../../state/list'
 
 export const List = ({ items = [], addItem, removeItem, toggleIsActive }) =>
   <React.Fragment>

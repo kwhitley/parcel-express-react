@@ -32,7 +32,7 @@ app.get('/test', (req, res) =>
 )
 
 // json import support
-app.get('/package.json', (req, res) => setTimeout(() => res.json(pkg), 2000))
+app.get('/package.json', (req, res) => setTimeout(() => res.json(pkg), 1000))
 
 const serverPort = process.env.PORT || 3000
 app.listen(serverPort)

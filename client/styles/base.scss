@@ -29,3 +29,12 @@ ul {
 li {
   margin-bottom: 0.5em;
 }
+
+.pages {
+  position: relative;
+
+  > * {
+    position: absolute;
+    width: 100%;
+  }
+}
