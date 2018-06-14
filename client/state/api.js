@@ -6,9 +6,11 @@ import { call, put, takeLatest, delay } from 'redux-saga/effects'
 
 export const namespace = 'api'
 
+const byName = (a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0)
 const toDepsArray = deps => deps && Object
                                       .entries(deps.toJS())
                                       .map(i => ({ name: i[0], version: i[1] }))
+                                      .sort(byName)
 
 const getPackage = state => state.getIn(['package'])
 const getTimesLoaded = state => state.get('timesLoaded')

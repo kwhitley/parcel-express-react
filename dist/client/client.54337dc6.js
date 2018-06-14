@@ -39665,7 +39665,7 @@ module.exports.default = axios;
 
 },{"./utils":422,"./helpers/bind":424,"./core/Axios":425,"./defaults":423,"./cancel/Cancel":426,"./cancel/CancelToken":427,"./cancel/isCancel":428,"./helpers/spread":429}],156:[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":237}],13:[function(require,module,exports) {
+},{"./lib/axios":237}],17:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39706,10 +39706,13 @@ var _marked = /*#__PURE__*/_regenerator2.default.mark(watcherSaga),
 
 var namespace = exports.namespace = 'api';
 
+var byName = function byName(a, b) {
+  return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+};
 var toDepsArray = function toDepsArray(deps) {
   return deps && (0, _entries2.default)(deps.toJS()).map(function (i) {
     return { name: i[0], version: i[1] };
-  });
+  }).sort(byName);
 };
 
 var getPackage = function getPackage(state) {
@@ -39851,6 +39854,7 @@ exports.default = _default;
   }
 
   reactHotLoader.register(namespace, 'namespace', '/Users/kevinwhitley/dev/kwhitley/parcel-test/client/state/api.js');
+  reactHotLoader.register(byName, 'byName', '/Users/kevinwhitley/dev/kwhitley/parcel-test/client/state/api.js');
   reactHotLoader.register(toDepsArray, 'toDepsArray', '/Users/kevinwhitley/dev/kwhitley/parcel-test/client/state/api.js');
   reactHotLoader.register(getPackage, 'getPackage', '/Users/kevinwhitley/dev/kwhitley/parcel-test/client/state/api.js');
   reactHotLoader.register(getTimesLoaded, 'getTimesLoaded', '/Users/kevinwhitley/dev/kwhitley/parcel-test/client/state/api.js');
@@ -39971,7 +39975,7 @@ exports.default = _default;
 })();
 
 ;
-},{"react-hot-loader":16,"redux-automap":154,"./list":160,"./api":13,"./route":14}],218:[function(require,module,exports) {
+},{"react-hot-loader":16,"redux-automap":154,"./list":160,"./api":17,"./route":14}],218:[function(require,module,exports) {
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -83141,11 +83145,6 @@ var Package = exports.Package = function Package(_ref) {
     'div',
     { className: 'package-loader' },
     _react2.default.createElement(
-      _semanticUiReact.Header,
-      null,
-      'Package'
-    ),
-    _react2.default.createElement(
       _semanticUiReact.Button,
       { fluid: true, disabled: pkg.isLoading, onClick: loadPackageInfo, loading: pkg.isLoading },
       deps && (0, _keys2.default)(deps).length ? 'Reload Package (loaded ' + timesLoaded + ' times)' : 'Load Package'
@@ -83193,7 +83192,7 @@ exports.default = _default;
 })();
 
 ;
-},{"babel-runtime/core-js/object/keys":216,"react-hot-loader":16,"react":18,"semantic-ui-react":217,"react-redux":22,"react-wrappers":218,"./Dependencies":90,"../../messages/ErrorMessage":214,"../../../state/api":13}],437:[function(require,module,exports) {
+},{"babel-runtime/core-js/object/keys":216,"react-hot-loader":16,"react":18,"semantic-ui-react":217,"react-redux":22,"react-wrappers":218,"./Dependencies":90,"../../messages/ErrorMessage":214,"../../../state/api":17}],437:[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -85164,9 +85163,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var history = (0, _createBrowserHistory2.default)();
 
-console.log('mergedReducers', _state2.default);
-console.log('api.sagas', _api2.default.sagas);
-
 var sagaMiddleware = (0, _reduxSaga2.default)();
 var rootReducer = (0, _reduxImmutable.combineReducers)(_state2.default);
 var store = (0, _redux.createStore)(rootReducer, (0, _redux.compose)((0, _redux.applyMiddleware)(sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
@@ -85175,8 +85171,6 @@ var store = (0, _redux.createStore)(rootReducer, (0, _redux.compose)((0, _redux.
 history.listen(function (location, action) {
   var path = '' + location.pathname + location.search + location.hash;
   store.dispatch(_route2.default.actions.change(path));
-  console.log('The current URL is ' + location.pathname + location.search + location.hash);
-  console.log('The last navigation action was ' + action);
 });
 
 var path = '' + location.pathname + location.search + location.hash;
@@ -85184,8 +85178,6 @@ store.dispatch(_route2.default.actions.change(path));
 
 // register sagas
 sagaMiddleware.run(_api2.default.sagas.watcherSaga);
-
-console.log('store initial state', store.getState());
 
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
@@ -85196,10 +85188,6 @@ console.log('store initial state', store.getState());
     _react2.default.createElement(_App2.default, null)
   )
 ), document.getElementById('app'));
-
-fetch('/test').then(function (r) {
-  return r.json();
-}).then(console.log).catch(console.warn);
 ;
 
 (function () {
@@ -85220,7 +85208,7 @@ fetch('/test').then(function (r) {
 })();
 
 ;
-},{"react-hot-loader":16,"semantic-ui-css/semantic.min.css":17,"react":18,"react-dom":19,"redux-immutable":20,"redux":21,"react-redux":22,"react-router-dom":23,"redux-saga":24,"history/createBrowserHistory":25,"./state":60,"./components/App":12,"./images/storm-trooper.png":11,"./state/api":13,"./state/route":14}],983:[function(require,module,exports) {
+},{"react-hot-loader":16,"semantic-ui-css/semantic.min.css":17,"react":18,"react-dom":19,"redux-immutable":20,"redux":21,"react-redux":22,"react-router-dom":23,"redux-saga":24,"history/createBrowserHistory":25,"./state":60,"./components/App":12,"./images/storm-trooper.png":11,"./state/api":17,"./state/route":14}],982:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -85249,7 +85237,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56158' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59771' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -85390,5 +85378,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[983,5], null)
+},{}]},{},[982,5], null)
 //# sourceMappingURL=/client.54337dc6.map

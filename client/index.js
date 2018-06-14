@@ -19,9 +19,6 @@ import imageURL from './images/storm-trooper.png'
 import api from './state/api'
 import route from './state/route'
 
-console.log('mergedReducers', mergedReducers)
-console.log('api.sagas', api.sagas)
-
 const sagaMiddleware = createSagaMiddleware()
 const rootReducer = combineReducers(mergedReducers)
 const store = createStore(
@@ -36,8 +33,6 @@ const store = createStore(
 history.listen((location, action) => {
   let path = `${location.pathname}${location.search}${location.hash}`
   store.dispatch(route.actions.change(path))
-  console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
-  console.log(`The last navigation action was ${action}`)
 })
 
 let path = `${location.pathname}${location.search}${location.hash}`
@@ -46,8 +41,6 @@ store.dispatch(route.actions.change(path))
 // register sagas
 sagaMiddleware.run(api.sagas.watcherSaga)
 
-console.log('store initial state', store.getState())
-
 render(
   <Provider store={store}>
     <HashRouter>
@@ -55,8 +48,3 @@ render(
     </HashRouter>
   </Provider>,
   document.getElementById('app'))
-
-fetch('/test')
-  .then(r => r.json())
-  .then(console.log)
-  .catch(console.warn)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Button, Grid } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fromImmutable } from 'react-wrappers'
 import Dependencies from './Dependencies'
@@ -10,7 +10,6 @@ const { loadPackageInfo, loadPackageInfoSuccess } = api.actions
 
 export const Package = ({ pkg, deps, devDeps, timesLoaded, loadPackageInfo }) =>
   <div className="package-loader">
-    <Header>Package</Header>
     <Button fluid disabled={pkg.isLoading} onClick={loadPackageInfo} loading={pkg.isLoading}>
       { deps && Object.keys(deps).length ? `Reload Package (loaded ${timesLoaded} times)` : 'Load Package' }
     </Button>

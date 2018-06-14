@@ -32,7 +32,10 @@ app.get('/test', (req, res) =>
 )
 
 // json import support
-app.get('/package.json', (req, res) => setTimeout(() => res.json(pkg), 1000))
+app.get('/package.json', (req, res) => setTimeout(() => {
+  let chance = Math.random() > 0.4
+  chance && res.json(pkg) || res.status(403).send()
+}, 1000))
 
 const serverPort = process.env.PORT || 3000
 app.listen(serverPort)
