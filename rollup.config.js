@@ -31,10 +31,7 @@ export default {
     }),
     replace({ 'process.env.NODE_ENV': JSON.stringify('production') })
   ],
-  external: [
-    'react',
-    'immutable'
-  ],
+  external,
   output: [
     {
       file: './dist/index.js',

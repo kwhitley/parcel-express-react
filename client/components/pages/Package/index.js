@@ -3,8 +3,8 @@ import { Header, Button, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fromImmutable } from 'react-wrappers'
 import Dependencies from './Dependencies'
-import ErrorMessage from './ErrorMessage'
-import api from '../state/api'
+import ErrorMessage from '../../messages/ErrorMessage'
+import api from '../../../state/api'
 
 const { loadPackageInfo, loadPackageInfoSuccess } = api.actions
 
@@ -19,14 +19,12 @@ export const Package = ({ pkg, deps, timesLoaded, loadPackageInfo }) =>
   </div>
 
 const mapStateToProps = state => ({
-  pkg: api.selectors.namespaced.getPackage(state),
-  deps: api.selectors.namespaced.getDependencies(state),
-  devDeps: api.selectors.namespaced.getDevDependencies(state),
-  timesLoaded: api.selectors.namespaced.getTimesLoaded(state),
+  pkg: api.getPackage(state),
+  deps: api.getDependencies(state),
+  devDeps: api.getDevDependencies(state),
+  timesLoaded: api.getTimesLoaded(state),
 })
 
-export const ConnectedPackage = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   loadPackageInfo
 })(fromImmutable(Package))
-
-export default Package

@@ -7,21 +7,24 @@ import { hot } from 'react-hot-loader'
 import { combineReducers } from 'redux-immutable'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import history from 'history'
-import { routerMiddleware, connectRouter } from 'connected-react-router/immutable'
 import { HashRouter } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
+
+// history
+import createHistory from 'history/createBrowserHistory'
+const history = createHistory()
 
 import mergedReducers from './state'
 import App from './components/App'
 import imageURL from './images/storm-trooper.png'
-import api from './state/api';
+import api from './state/api'
+import route from './state/route'
 
-console.log('mergedReducers', mergedReducers);
-console.log('api.sagas', api.sagas);
+console.log('mergedReducers', mergedReducers)
+console.log('api.sagas', api.sagas)
 
-const sagaMiddleware = createSagaMiddleware();
-const rootReducer = combineReducers(mergedReducers);
+const sagaMiddleware = createSagaMiddleware()
+const rootReducer = combineReducers(mergedReducers)
 const store = createStore(
   rootReducer,
   compose(
@@ -30,10 +33,16 @@ const store = createStore(
   )
 )
 
-// history.listen((location, action) => {
-//   console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
-//   console.log(`The last navigation action was ${action}`)
-// })
+// history binding... messy, abstract elsewhere or turn into module
+history.listen((location, action) => {
+  let path = `${location.pathname}${location.search}${location.hash}`
+  store.dispatch(route.actions.change(path))
+  console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
+  console.log(`The last navigation action was ${action}`)
+})
+
+let path = `${location.pathname}${location.search}${location.hash}`
+store.dispatch(route.actions.change(path))
 
 // register sagas
 sagaMiddleware.run(api.sagas.watcherSaga)

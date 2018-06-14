@@ -2,13 +2,10 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var dotenv = _interopDefault(require('dotenv'));
 var express = _interopDefault(require('express'));
 var bodyParser = _interopDefault(require('body-parser'));
 var compression = _interopDefault(require('compression'));
 var APP_ROOT = _interopDefault(require('app-root-path'));
-
-dotenv.config({ silent: true });
 
 var name = "parcel-test";
 var version = "1.0.0";
@@ -34,16 +31,14 @@ var dependencies = {
 	"app-root-path": "^2.0.1",
 	"body-parser": "^1.18.3",
 	compression: "^1.7.2",
-	dotenv: "^5.0.1",
-	express: "^4.16.3",
-	"humanize-duration": "^3.14.0",
-	immutable: "^3.8.2",
-	"react-dom": "^16.4.0",
-	"redux-automap": "^1.2.0"
+	"env-autoload": "^1.0.1",
+	express: "^4.16.3"
 };
 var devDependencies = {
+	axios: "^0.18.0",
 	"babel-cli": "^6.26.0",
 	"babel-eslint": "^8.2.3",
+	"babel-plugin-transform-function-bind": "^6.22.0",
 	"babel-plugin-transform-class-properties": "^6.24.1",
 	"babel-plugin-transform-object-rest-spread": "^6.26.0",
 	"babel-plugin-transform-runtime": "^6.23.0",
@@ -65,7 +60,16 @@ var devDependencies = {
 	"rollup-plugin-node-resolve": "^3.3.0",
 	"rollup-plugin-replace": "^2.0.0",
 	"semantic-ui-css": "^2.3.1",
-	"semantic-ui-react": "^0.80.2"
+	"semantic-ui-react": "^0.80.2",
+	history: "^4.7.2",
+	"humanize-duration": "^3.14.0",
+	immutable: "^3.8.2",
+	"prop-types": "^15.6.1",
+	"react-dom": "^16.4.0",
+	"react-router-dom": "^4.3.1",
+	"react-wrappers": "^1.0.0",
+	"redux-automap": "^1.3.1",
+	"redux-saga": "^0.16.0"
 };
 var pkg = {
 	name: name,
@@ -80,6 +84,7 @@ var pkg = {
 };
 
 // load .env using dotenv first
+require('env-autoload');
 
 // instantiate express
 var app = express();
@@ -98,13 +103,16 @@ app.get('/test', function (req, res) {
     foo: 'bar',
     mode: "production",
     port: process.env.PORT,
+    test: process.env.TEST,
     production: PRODUCTION
   });
 });
 
 // json import support
 app.get('/package.json', function (req, res) {
-  return res.json(pkg);
+  return setTimeout(function () {
+    return res.json(pkg);
+  }, 2000);
 });
 
 var serverPort = process.env.PORT || 3000;

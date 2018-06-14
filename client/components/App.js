@@ -1,27 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ConnectedMenu } from './Menu'
-import { ConnectedPackage } from './Package'
+import List from './pages/List'
+import Package from './pages/Package'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Navigation from './Nav'
 
 
-const App = ({ history, location }) => {
+const App = () => {
   return (
     <div>
       <h1>Parcel Test</h1>
       <Navigation />
       <Switch>
-        <Route path="/list" component={ConnectedMenu} />
-        <Route path="/package" component={ConnectedPackage} />
+        <Route path="/list" component={List} />
+        <Route path="/package" component={Package} />
         <Redirect from="/" exact to="/list" />
       </Switch>
     </div>
   )
-}
-
-App.propTypes = {
-  history: PropTypes.object,
 }
 
 export default App

@@ -1,9 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { fromImmutable } from 'react-wrappers'
 import { Button, Divider, Input, Table, Transition } from 'semantic-ui-react'
 import Item from './Item'
 import AddItem from './AddItem'
+import list from '../../../state/list';
 
-export default ({ items = [], addItem, removeItem, toggleIsActive }) =>
+export const List = ({ items = [], addItem, removeItem, toggleIsActive }) =>
   <React.Fragment>
     <AddItem addItem={addItem} />
     <Divider horizontal>{ items.length } Items</Divider>
@@ -31,3 +34,9 @@ export default ({ items = [], addItem, removeItem, toggleIsActive }) =>
       </Table.Body>
     </Table>
   </React.Fragment>
+
+const mapStateToProps = state => ({
+  items: list.getItems(state)
+})
+
+export default connect(mapStateToProps, list.actions)(fromImmutable(List))

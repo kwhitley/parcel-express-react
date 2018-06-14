@@ -1,5 +1,5 @@
 // load .env using dotenv first
-import env from 'env-autoload'
+require('env-autoload')
 
 // include other main deps
 import express from 'express'
@@ -7,6 +7,7 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import pkg from '../package.json'
 import APP_ROOT from 'app-root-path'
+
 
 // instantiate express
 const app = express()
