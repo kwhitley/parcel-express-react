@@ -4,7 +4,7 @@ import List from './List';
 import { ListProvider } from './ListContext';
 import { connect } from 'react-redux';
 import list from '../state/list';
-import { toJS } from './toJS';
+import { fromImmutable } from 'react-wrappers';
 
 const { addItem, removeItem, toggleIsActive } = list.actions;
 
@@ -22,6 +22,6 @@ export const ConnectedMenu = connect(mapStateToProps, {
   addItem,
   removeItem,
   toggleIsActive
-})(toJS(Menu));
+})(fromImmutable(Menu));
 
 export default Menu;

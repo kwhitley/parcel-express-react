@@ -27,10 +27,15 @@ export default {
         'transform-object-rest-spread'
       ]
     }),
-    commonjs(),
+    commonjs({
+      exclude: 'src/**'
+    }),
     replace({ 'process.env.NODE_ENV': JSON.stringify('production') })
   ],
-  external,
+  external: [
+    'react',
+    'immutable'
+  ],
   output: [
     {
       file: './dist/index.js',

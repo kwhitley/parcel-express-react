@@ -3,7 +3,7 @@ import { ListProvider } from './ListContext';
 import { Header, Button, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import api from '../state/api';
-import { toJS } from './toJS';
+import { fromImmutable } from 'react-wrappers';
 import Dependencies from './Dependencies';
 import ErrorMessage from './ErrorMessage';
 
@@ -32,6 +32,6 @@ const mapStateToProps = state => ({
 
 export const ConnectedPackage = connect(mapStateToProps, {
   loadPackageInfo
-})(toJS(Package));
+})(fromImmutable(Package));
 
 export default Package;

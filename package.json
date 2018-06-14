@@ -25,12 +25,17 @@
     "babel-plugin-transform-function-bind": "^6.22.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.2",
+    "connected-react-router": "^4.3.0",
     "env-autoload": "^1.0.1",
     "express": "^4.16.3",
+    "history": "^4.7.2",
     "humanize-duration": "^3.14.0",
     "immutable": "^3.8.2",
+    "prop-types": "^15.6.1",
     "react-dom": "^16.4.0",
+    "react-wrappers": "^1.0.0",
     "redux-automap": "^1.2.0",
+    "redux-little-router": "^15.1.1",
     "redux-saga": "^0.16.0"
   },
   "devDependencies": {

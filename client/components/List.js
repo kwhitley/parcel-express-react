@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Divider, Input, Table } from 'semantic-ui-react';
+import { Button, Divider, Input, Table, Transition } from 'semantic-ui-react';
 import Item from './Item';
 import AddItem from './AddItem';
 
@@ -19,15 +19,15 @@ export default ({ items = [], addItem, removeItem, toggleIsActive }) =>
       </Table.Header>
 
       <Table.Body>
-        {
-          items.map(item => <Item
-                              key={item.id}
-                              item={item}
-                              removeItem={() => removeItem(item.id)}
-                              toggleIsActive={() => toggleIsActive(item.id)}
-                              />
-                    )
-        }
+      {
+        items.map(item => <Item
+                            key={item.id}
+                            item={item}
+                            removeItem={() => removeItem(item.id)}
+                            toggleIsActive={() => toggleIsActive(item.id)}
+                            />
+                  )
+      }
       </Table.Body>
     </Table>
   </React.Fragment>
