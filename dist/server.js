@@ -17,10 +17,6 @@ var _compression = require('compression');
 
 var _compression2 = _interopRequireDefault(_compression);
 
-var _package = require('../package.json');
-
-var _package2 = _interopRequireDefault(_package);
-
 var _appRootPath = require('app-root-path');
 
 var _appRootPath2 = _interopRequireDefault(_appRootPath);
@@ -38,6 +34,7 @@ require('env-autoload');
 
 // include other main deps
 
+var pkg = require(_appRootPath2.default + '/package.json');
 
 // instantiate express
 var app = (0, _express2.default)();
@@ -66,7 +63,7 @@ app.get('/test', function (req, res) {
 app.get('/package.json', function (req, res) {
   return setTimeout(function () {
     var chance = Math.random() > 0.4;
-    chance && res.json(_package2.default) || res.status(403).send();
+    chance && res.json(pkg) || res.status(403).send();
   }, 1000);
 });
 

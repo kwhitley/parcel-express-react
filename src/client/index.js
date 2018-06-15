@@ -1,5 +1,6 @@
 import 'semantic-ui-css/semantic.min.css'
 import 'antd/dist/antd.min.css'
+import './styles/base.scss'
 import './styles/base.less'
 
 import React from 'react'
@@ -17,7 +18,6 @@ const history = createHistory()
 
 import mergedReducers from './state'
 import App from './components/App'
-import imageURL from './images/storm-trooper.png'
 import api from './state/api'
 import route from './state/route'
 import dashboards from './state/dashboards'

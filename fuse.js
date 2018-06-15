@@ -4,6 +4,8 @@ const {
   HTMLPlugin,
   JSONPlugin,
   CSSPlugin,
+  CSSModules,
+  CSSResourcePlugin,
   SassPlugin,
   LESSPlugin,
   WebIndexPlugin,
@@ -24,23 +26,33 @@ const fuse = FuseBox.init({
     BabelPlugin({
       config: {
         sourceMaps: true,
-        presets: [ "env", "react" ],
+        presets: [ 'env', 'react' ],
         plugins: [
           'transform-class-properties',
           'transform-object-rest-spread',
-          'transform-function-bind'
+          'transform-function-bind',
+          'transform-runtime'
         ],
       },
     }),
-    JSONPlugin(),
     [SassPlugin(), CSSPlugin()],
     [LESSPlugin(), CSSPlugin()],
-    CSSPlugin(),
+    [
+      // 'node_modules.**css',
+      CSSResourcePlugin({
+          dist: 'dist/client/assets',
+          resolve: (f) => `/assets/${f}`
+      }),
+      CSSPlugin({
+        group: 'app.css',
+        outFile: `dist/client/app.css`
+      })
+    ],
     WebIndexPlugin({
       title: 'Fuse Box Demo',
       target: 'client/index.html',
       template: 'static/index.html',
-      bundles: ['client/app']
+      bundles: ['client/vendor', 'client/app', ]
     }),
     isProduction && QuantumPlugin(),
     isProduction && UglifyJSPlugin()
@@ -49,19 +61,45 @@ const fuse = FuseBox.init({
 
 fuse.dev({ port: 4445, httpServer: false })
 
+fuse
+  .bundle('client/vendor')
+  .target('browser')
+  .instructions('~ client/index.js')
+
+fuse
+  .bundle('client/app')
+  .target('browser')
+  // .plugin(
+  //   isProduction && CSSModules(),
+  //   isProduction && CSSPlugin({
+  //     group: 'app.css',
+  //     outFile: 'dist/app.css'
+  //   })
+  // )
+  .watch('client/**')
+  .hmr()
+  .instructions('!> [client/index.js]')
+
 fuse.bundle('server')
     .watch('server/**') // watch only server related code.. bugs up atm
     .instructions(' > [server/index.js]')
+    .plugin(JSONPlugin())
     // Execute process right after bundling is completed
     // launch and restart express
     .completed(proc => proc.start())
 
-
-fuse.bundle('client/app')
-    .target('browser')
-    .watch('client/**') // watch only client related code
-    .hmr()
-    .instructions(' > client/test.js')
+// fuse.bundle('client/app')
+//     .target('browser')
+//     .plugin(
+//       isProduction && CSSModules(),
+//       isProduction && CSSPlugin({
+//         group: 'app.css',
+//         outFile: 'dist/app.css'
+//       })
+//     )
+//     .watch('client/**') // watch only client related code
+//     .hmr()
+//     .instructions(' > client/index.js')
 
 
 fuse.run()

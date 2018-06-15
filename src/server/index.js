@@ -5,9 +5,8 @@ require('env-autoload')
 import express from 'express'
 import bodyParser from 'body-parser'
 import compression from 'compression'
-import pkg from '../package.json'
 import APP_ROOT from 'app-root-path'
-
+const pkg = require(APP_ROOT + '/package.json')
 
 // instantiate express
 const app = express()
