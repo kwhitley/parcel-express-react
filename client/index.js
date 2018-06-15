@@ -20,6 +20,7 @@ import App from './components/App'
 import imageURL from './images/storm-trooper.png'
 import api from './state/api'
 import route from './state/route'
+import dashboards from './state/dashboards'
 
 const sagaMiddleware = createSagaMiddleware()
 const rootReducer = combineReducers(mergedReducers)
@@ -36,6 +37,9 @@ history.listen((location, action) => {
   let path = `${location.pathname}${location.search}${location.hash}`
   store.dispatch(route.actions.change(path))
 })
+
+store.dispatch(dashboards.addGroup('Newish Group', 1))
+store.dispatch(dashboards.addTagToGroup(6,2))
 
 let path = `${location.pathname}${location.search}${location.hash}`
 store.dispatch(route.actions.change(path))
