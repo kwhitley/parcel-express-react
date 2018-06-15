@@ -17,7 +17,11 @@
     "build:start": "npm run build && npm start",
     "predev": "rm -rf dist",
     "dev": "npm run dev:server & npm run dev:client",
-    "sandbox": "nodemon --watch ./client --exec babel-node ./client/state/demo.js"
+    "sandbox": "nodemon --watch ./client --exec babel-node ./client/state/demo.js",
+    "prefuse": "rm -rf dist",
+    "fuse": "node fuse.js",
+    "prefuse:build": "rm -rf dist",
+    "fuse:build": "node fuse.js production"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +43,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "fuse-box": "^3.2.2",
     "history": "^4.7.2",
     "humanize-duration": "^3.15.0",
     "immutable": "^3.8.2",
@@ -67,6 +72,9 @@
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-replace": "^2.0.0",
     "semantic-ui-css": "^2.3.1",
-    "semantic-ui-react": "^0.81.1"
+    "semantic-ui-react": "^0.81.1",
+    "typescript": "^2.9.2",
+    "uglify-es": "^3.3.9",
+    "uglify-js": "^3.4.0"
   }
 }
