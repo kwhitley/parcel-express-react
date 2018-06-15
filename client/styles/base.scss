@@ -35,6 +35,10 @@ body {
   }
 }
 
+.cards > .card {
+  box-shadow: none !important;
+}
+
 .page-content {
   padding-top: 1em;
 }
