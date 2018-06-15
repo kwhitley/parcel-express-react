@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "dev:client": "parcel watch client/index.html --out-dir dist/client",
     "dev:server": "nodemon --watch ./server --exec babel-node ./server/index.js",
-    "build:client": "parcel build client/index.html --out-dir dist/client --detailed-report",
+    "build:client": "parcel build client/index.html --out-dir dist/client",
     "build:server": "rollup -c",
     "prebuild": "rm -rf dist",
     "build": "npm run build:client && npm run build:server",

@@ -17,7 +17,7 @@ var scripts = {
 	clean: "rm -rf dist",
 	"dev:client": "parcel watch client/index.html --out-dir dist/client",
 	"dev:server": "nodemon --watch ./server --exec babel-node ./server/index.js",
-	"build:client": "parcel build client/index.html --out-dir dist/client --detailed-report",
+	"build:client": "parcel build client/index.html --out-dir dist/client",
 	"build:server": "rollup -c",
 	prebuild: "rm -rf dist",
 	build: "npm run build:client && npm run build:server",
@@ -33,7 +33,7 @@ var dependencies = {
 	compression: "^1.7.2",
 	"env-autoload": "^1.0.1",
 	express: "^4.16.3",
-	"react-router-transition": "^1.2.1"
+	"react-transition-group": "^2.3.1"
 };
 var devDependencies = {
 	axios: "^0.18.0",
@@ -53,13 +53,12 @@ var devDependencies = {
 	nodemon: "^1.17.5",
 	parcel: "^1.9.0",
 	"prop-types": "^15.6.1",
-	react: "^15.0.0 || ^16.0.0",
-	"react-dom": "^15.0.0 || ^16.0.0",
+	react: ">=15.0.0",
+	"react-dom": ">=15.0.0",
 	"react-hot-loader": "^4.3.2",
 	"react-redux": "^5.0.7",
 	"react-router-dom": "^4.3.1",
-	"react-transition-group": "^2.3.1",
-	"react-treebeard": "^2.1.0",
+	"react-router-transition": "^1.2.1",
 	"react-wrappers": "^1.0.0",
 	redux: "^4.0.0",
 	"redux-automap": "^1.3.1",
