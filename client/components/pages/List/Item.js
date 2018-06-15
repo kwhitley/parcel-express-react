@@ -14,7 +14,7 @@ export default ({ item, removeItem, toggleIsActive }) => {
           disabled={item.isActive}
           />
       </Table.Cell>
-      <Table.Cell>{ item.id }</Table.Cell>
+      <Table.Cell width={1}>{ item.id }</Table.Cell>
       <Table.Cell>{ item.name }</Table.Cell>
       <Table.Cell>created { humanize(new Date - item.date, { round: true }) } ago</Table.Cell>
       <Table.Cell width={1}>

@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import List from './pages/List'
-import Package from './pages/Package'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { AnimatedSwitch } from 'react-router-transition'
-import Navigation from './Nav'
+import { default as Navigation, routes } from './Nav'
 import { hot } from 'react-hot-loader'
 
 const App = () => {
@@ -13,9 +11,14 @@ const App = () => {
       <h1>Parcel Test</h1>
       <Navigation />
       <Switch>
-        <Route path="/list" component={List} />
-        <Route path="/package" component={Package} />
-        <Redirect from="/" exact to="/list" />
+        {
+          routes.map(route => <Route
+                                key={route.path}
+                                path={route.path}
+                                component={route.component}
+                              />)
+        }
+        <Redirect from="/" exact to={routes.length && routes[0].path} />
       </Switch>
     </div>
   )

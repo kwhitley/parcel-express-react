@@ -33,7 +33,9 @@ var dependencies = {
 	compression: "^1.7.2",
 	"env-autoload": "^1.0.1",
 	express: "^4.16.3",
-	"react-router-transition": "^1.2.1"
+	"react-checkbox-tree": "^1.2.2",
+	"react-router-transition": "^1.2.1",
+	"react-treebeard": "^2.1.0"
 };
 var devDependencies = {
 	axios: "^0.18.0",
@@ -114,7 +116,8 @@ app.get('/test', function (req, res) {
 // json import support
 app.get('/package.json', function (req, res) {
   return setTimeout(function () {
-    return res.json(pkg);
+    var chance = Math.random() > 0.4;
+    chance && res.json(pkg) || res.status(403).send();
   }, 1000);
 });
 

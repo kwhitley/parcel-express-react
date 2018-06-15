@@ -3,7 +3,7 @@ import { List, Header, Statistic } from 'semantic-ui-react'
 
 export default ({ name, libs }) =>
   <div>
-    <Statistic horizontal label={name} value={libs.length} />
+    <Statistic horizontal color='green' label={name} value={libs.length} />
     <List>
       {
         libs && libs.map(lib => (
