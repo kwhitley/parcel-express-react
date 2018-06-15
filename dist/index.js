@@ -32,10 +32,10 @@ var dependencies = {
 	"body-parser": "^1.18.3",
 	compression: "^1.7.2",
 	"env-autoload": "^1.0.1",
-	express: "^4.16.3",
-	"react-transition-group": "^2.3.1"
+	express: "^4.16.3"
 };
 var devDependencies = {
+	antd: "^3.6.2",
 	axios: "^0.18.0",
 	"babel-cli": "^6.26.0",
 	"babel-eslint": "^8.2.3",
@@ -53,9 +53,9 @@ var devDependencies = {
 	nodemon: "^1.17.5",
 	parcel: "^1.9.0",
 	"prop-types": "^15.6.1",
-	react: ">=15.0.0",
-	"react-dom": ">=15.0.0",
-	"react-hot-loader": "^4.3.2",
+	react: ">=16.4.1",
+	"react-dom": ">=16.4.1",
+	"react-hot-loader": "^4.3.3",
 	"react-redux": "^5.0.7",
 	"react-router-dom": "^4.3.1",
 	"react-router-transition": "^1.2.1",

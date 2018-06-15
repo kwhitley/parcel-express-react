@@ -21,6 +21,24 @@ body {
   }
 }
 
+.navigation {
+  &:hover .item {
+    border-bottom-color: transparent !important;
+  }
+
+  .item {
+    transition: all 0.3s ease !important;
+
+    &:hover {
+      border-color: #1b1c1d !important;
+    }
+  }
+}
+
+.page-content {
+  padding-top: 1em;
+}
+
 ul {
   list-style-type: none;
   padding: 0;

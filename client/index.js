@@ -1,8 +1,9 @@
 import 'semantic-ui-css/semantic.min.css'
 import './styles/base.less'
+import 'antd/dist/antd.min.css'
 
 import React from 'react'
-import { render } from 'react-dom'
+import ReactDom from 'react-dom'
 
 import { combineReducers } from 'redux-immutable'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -42,10 +43,11 @@ store.dispatch(route.actions.change(path))
 // register sagas
 sagaMiddleware.run(api.sagas.watcherSaga)
 
-render(
+ReactDom.render(
   <Provider store={store}>
     <HashRouter>
       <App />
     </HashRouter>
   </Provider>,
-  document.getElementById('app'))
+  document.getElementById('app')
+)
