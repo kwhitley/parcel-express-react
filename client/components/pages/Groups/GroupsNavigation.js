@@ -1,14 +1,17 @@
 import React from 'react'
-// import ReactTreeBeard from 'react-treebeard'
 
-// class GroupsNavigation extends React.Component {
-//   render() {
-//     return (
-//       <div>FOOOOO</div>
-//     )
-//   }
-// }
+class GroupsNavigation extends React.Component {
+  constructor(props){
+    super(props)
+  }
 
-const GroupsNavigation = () => <div>Foo</div>
+  state = {}
+
+  render() {
+    return (
+      <div>Groups</div>
+    )
+  }
+}
 
 export default GroupsNavigation
