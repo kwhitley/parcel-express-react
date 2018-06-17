@@ -2,8 +2,12 @@ import React from 'react'
 import { Input, Form } from 'semantic-ui-react'
 
 class AddItem extends React.Component {
-  state = {
-    value: 'foo'
+  constructor(props) {
+    super(props)
+
+    this.state = { value: 'foo' }
+    this.update = this.update.bind(this)
+    this.addItem = this.addItem.bind(this)
   }
 
   update(e) {
@@ -20,13 +24,13 @@ class AddItem extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={::this.addItem}>
+      <Form onSubmit={this.addItem}>
         <Input
           fluid
           placeholder="New Item"
           action={{ labelPosition: 'right', icon: 'plus', content: 'Add Item' }}
           actionPosition='left'
-          onChange={::this.update}
+          onChange={this.update}
           value={this.state.value}
           />
       </Form>

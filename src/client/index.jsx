@@ -1,7 +1,5 @@
 import 'semantic-ui-css/semantic.min.css'
 import 'antd/dist/antd.min.css'
-import './styles/base.scss'
-import './styles/base.less'
 
 import React from 'react'
 import ReactDom from 'react-dom'
@@ -11,17 +9,17 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
-
-// history
 import createHistory from 'history/createBrowserHistory'
-const history = createHistory()
 
 import mergedReducers from './state'
 import App from './components/App'
 import api from './state/api'
 import route from './state/route'
 import dashboards from './state/dashboards'
+import './styles/base.scss'
+import './styles/base.less'
 
+const history = createHistory()
 const sagaMiddleware = createSagaMiddleware()
 const rootReducer = combineReducers(mergedReducers)
 const store = createStore(
@@ -39,7 +37,7 @@ history.listen((location) => {
 })
 
 store.dispatch(dashboards.addGroup('Newish Group', 1))
-store.dispatch(dashboards.addTagToGroup(6,2))
+store.dispatch(dashboards.addTagToGroup(6, 2))
 
 let path = `${location.pathname}${location.search}${location.hash}`
 store.dispatch(route.actions.change(path))

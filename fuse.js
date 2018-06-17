@@ -21,12 +21,12 @@ const clientConfig = isProduction => ({
   cache: false,
   sourceMaps: true,
   plugins: [
-    ESLinter({
-      pattern: /js(x)*$/,
-      eslint: {
-        useEslintrc: true
-      }
-    }),
+    // ESLinter({
+    //   pattern: /js(x)*$/,
+    //   eslint: {
+    //     useEslintrc: true
+    //   }
+    // }),
     BabelPlugin({
       config: {
         sourceMaps: !isProduction,
@@ -108,7 +108,7 @@ task('default', async context => {
 
   client
     .bundle('app')
-    .instructions(' > client/index.js')
+    .instructions(' > client/index.jsx')
     .watch('src/client/**')
     .hmr()
 
@@ -132,11 +132,11 @@ task('build', async context => {
 
   client
     .bundle('vendor')
-    .instructions('~ client/index.js')
+    .instructions('~ client/index.jsx')
 
   client
     .bundle('app')
-    .instructions('!> [client/index.js]')
+    .instructions('!> [client/index.jsx]')
 
 
   server

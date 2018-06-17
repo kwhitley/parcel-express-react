@@ -8,9 +8,9 @@ export const initialState = '/'
 // define all action/reducer pairs here... add "type" attributes for
 export const actionReducers = [
   {
-    change: (path) => ({ type: 'route/CHANGE', path }),
-    reducer: (state, action) => action.path
-  }
+    change: path => ({ type: 'route/CHANGE', path }),
+    reducer: (state, action) => action.path,
+  },
 ]
 
 export default automap({ namespace, actionReducers, initialState })

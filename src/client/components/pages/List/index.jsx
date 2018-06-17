@@ -22,15 +22,15 @@ export const List = ({ items = [], addItem, removeItem, toggleIsActive }) =>
       </Table.Header>
 
       <Table.Body>
-      {
-        items.map(item => <Item
-                            key={item.id}
-                            item={item}
-                            removeItem={() => removeItem(item.id)}
-                            toggleIsActive={() => toggleIsActive(item.id)}
+        {
+          items.map(item => <Item
+                              key={item.id}
+                              item={item}
+                              removeItem={() => removeItem(item.id)}
+                              toggleIsActive={() => toggleIsActive(item.id)}
                             />
-                  )
-      }
+                    )
+        }
       </Table.Body>
     </Table>
   </React.Fragment>

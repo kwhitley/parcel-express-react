@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { default as Navigation, routes } from './Nav'
 import { hot } from 'react-hot-loader'
+import Navigation, { routes } from './Nav'
 
 const App = () => {
   return (

@@ -31,15 +31,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   var enterModule = require('react-hot-loader').enterModule;
 
   enterModule && enterModule(module);
-})();
+})(); // include other main deps
 
-// load .env using dotenv first
-require('env-autoload');
-
-// include other main deps
 
 // const pkg = require('../package.json')
 
+// load .env using dotenv first
+require('env-autoload');
 
 // instantiate express
 var app = (0, _express2.default)();
@@ -71,10 +69,9 @@ app.get('/package.json', function (req, res) {
   return setTimeout(function () {
     _fs2.default.readFile(_path2.default.join(__dirname, '../package.json'), 'utf8', function (err, data) {
       if (err) throw err;
-      var pkg = JSON.parse(data);
 
-      var chance = Math.random() > 0.4;
-      chance && res.json(pkg) || res.status(403).send();
+      var pkg = JSON.parse(data);
+      var chance = Math.random() > 0.4(chance && res.json(pkg)) || res.status(403).send();
     });
   }, 1000);
 });

@@ -2,9 +2,10 @@
   "presets": ["react", "env"],
   "plugins": [
     "transform-class-properties",
-    "transform-runtime",
+    "transform-decorators",
+    "transform-function-bind",
     "transform-object-rest-spread",
-    "transform-function-bind"
+    "transform-runtime"
   ],
   "env": {
     "development": {

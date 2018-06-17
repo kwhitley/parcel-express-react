@@ -9,14 +9,13 @@ const getNumItems = state => state.get('items').size
 const getHalfItems = (items, number) => items.slice(0, Math.floor(number / 2))
 
 const getItemsSorted = createSelector(
-  [ getItems ], items => {
-    return items.sort((a, b) => {
-      a = a.get('name')
-      b = b.get('name')
+  [ getItems ],
+  items => items.sort((A, B) => {
+    const a = B.get('name')
+    const b = A.get('name')
 
-      return a < b ? -1 : (a > b ? 1 : 0)
-    }).reverse()
-  }
+    return a < b ? -1 : (a > b ? 1 : 0)
+  }).reverse()
 )
 
 const getHalfItemsUnsorted = createSelector(
@@ -34,21 +33,21 @@ export const selectors = {
 const Entry = new Record({
   id: undefined,
   name: 'new item',
-  date: new Date,
-  isActive: false
+  date: new Date(),
+  isActive: false,
 })
 
 // initial state for reducer
 export const initialState = fromJS({
   items: [
-    { id: 1, name: 'foo', date: new Date, isActive: true },
-    { id: 2, name: 'bar', date: new Date, isActive: true },
-    { id: 3, name: 'baz', date: new Date, isActive: true },
-    { id: 4, name: 'cat', date: new Date, isActive: false },
-    { id: 5, name: 'miffles', date: new Date, isActive: false },
-    { id: 6, name: 'vlad', date: new Date, isActive: true },
-    { id: 7, name: 'baxter', date: new Date, isActive: true },
-  ]
+    { id: 1, name: 'foo', date: new Date(), isActive: true },
+    { id: 2, name: 'bar', date: new Date(), isActive: true },
+    { id: 3, name: 'baz', date: new Date(), isActive: true },
+    { id: 4, name: 'cat', date: new Date(), isActive: false },
+    { id: 5, name: 'miffles', date: new Date(), isActive: false },
+    { id: 6, name: 'vlad', date: new Date(), isActive: true },
+    { id: 7, name: 'baxter', date: new Date(), isActive: true },
+  ],
 })
 
 // define all action/reducer pairs here... add "type" attributes for
@@ -61,7 +60,7 @@ export const actionReducers = [
       return state.update('items', items => items.push(new Entry({
         id: nextID,
         name: action.name,
-        date: new Date,
+        date: new Date(),
       })))
     }
   },
@@ -71,10 +70,8 @@ export const actionReducers = [
   },
   {
     // type: constants.REMOVE_ITEM,
-    removeItem: (id) => ({ type:  'list/REMOVE_ITEM', id }),
-    reducer: (state, action) => {
-      return state.update('items', items => items.filter(i => i.get('id') !== action.id))
-    }
+    removeItem: id => ({ type: 'list/REMOVE_ITEM', id }),
+    reducer: (state, action) => state.update('items', items => items.filter(i => i.get('id') !== action.id))
   }
 ]
 
