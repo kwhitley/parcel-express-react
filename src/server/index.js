@@ -5,8 +5,8 @@ require('env-autoload')
 import express from 'express'
 import bodyParser from 'body-parser'
 import compression from 'compression'
-import APP_ROOT from 'app-root-path'
-const pkg = require(APP_ROOT + '/package.json')
+import path from 'path'
+const pkg = require('../package.json')
 
 // instantiate express
 const app = express()
@@ -17,8 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
 
 // static serving from /dist/client
-app.use(express.static(APP_ROOT + '/dist/client'))
-app.use('/client', express.static(APP_ROOT + '/dist/client'))
+const staticPath = path.join(__dirname, '../dist')
+console.log(`serving static content from ${staticPath}`)
+app.use(express.static(staticPath))
+// app.use('/client', express.static(staticPath))
 
 // example API entry
 app.get('/test', (req, res) =>

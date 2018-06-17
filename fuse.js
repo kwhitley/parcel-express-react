@@ -22,10 +22,12 @@ if (isProduction) {
 const fuse = FuseBox.init({
   homeDir: 'src',
   output: 'dist/$name.js',
+  // hash: isProduction,
+  debug: !isProduction,
   plugins: [
     BabelPlugin({
       config: {
-        sourceMaps: true,
+        sourceMaps: !isProduction,
         presets: [ 'env', 'react' ],
         plugins: [
           'transform-class-properties',
@@ -35,8 +37,17 @@ const fuse = FuseBox.init({
         ],
       },
     }),
-    [SassPlugin(), CSSPlugin()],
-    [LESSPlugin(), CSSPlugin()],
+    [
+      SassPlugin(),
+      CSSPlugin({
+        group: 'styles.css',
+        outFile: 'dist/client/styles.css'
+      })
+    ],
+    [
+      LESSPlugin(),
+      CSSPlugin()
+    ],
     [
       // 'node_modules.**css',
       CSSResourcePlugin({
@@ -44,18 +55,21 @@ const fuse = FuseBox.init({
           resolve: (f) => `/assets/${f}`
       }),
       CSSPlugin({
-        group: 'app.css',
-        outFile: `dist/client/app.css`
+        group: 'assets.css',
+        outFile: 'dist/client/assets.css'
       })
     ],
+    CSSPlugin({
+      group: 'app.css',
+      outFile: 'dist/client/app.css'
+    }),
     WebIndexPlugin({
       title: 'Fuse Box Demo',
       target: 'client/index.html',
       template: 'static/index.html',
       bundles: ['client/vendor', 'client/app', ]
-    }),
-    isProduction && QuantumPlugin(),
-    isProduction && UglifyJSPlugin()
+    })
+    // isProduction && UglifyJSPlugin()
   ]
 })
 
@@ -65,10 +79,18 @@ fuse
   .bundle('client/vendor')
   .target('browser')
   .instructions('~ client/index.js')
+  .plugin(isProduction && QuantumPlugin({
+    uglify: true,
+    treeshake : true
+  }))
 
-fuse
-  .bundle('client/app')
-  .target('browser')
+const appBundle = fuse
+                    .bundle('client/app')
+                    .target('browser')
+                    .plugin(isProduction && QuantumPlugin({
+                      uglify: true,
+                      treeshake : true
+                    }))
   // .plugin(
   //   isProduction && CSSModules(),
   //   isProduction && CSSPlugin({
@@ -76,17 +98,26 @@ fuse
   //     outFile: 'dist/app.css'
   //   })
   // )
-  .watch('client/**')
-  .hmr()
-  .instructions('!> [client/index.js]')
 
-fuse.bundle('server')
+  if (!isProduction) {
+    appBundle
+      .watch('client/**')
+      .hmr()
+  }
+
+  appBundle.instructions('!> [client/index.js]')
+
+const serverBundle = fuse.bundle('server')
     .watch('server/**') // watch only server related code.. bugs up atm
     .instructions(' > [server/index.js]')
     .plugin(JSONPlugin())
     // Execute process right after bundling is completed
     // launch and restart express
+
+if (!isProduction) {
+  serverBundle
     .completed(proc => proc.start())
+}
 
 // fuse.bundle('client/app')
 //     .target('browser')
