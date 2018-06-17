@@ -17,6 +17,7 @@ const clientConfig = isProduction => ({
   output: 'dist/client/$name.js',
   hash: isProduction,
   debug: !isProduction,
+  cache: false,
   sourceMaps: true,
   // useJsNext: ['semantic-ui-react'],
   plugins: [
@@ -112,7 +113,7 @@ task('default', async context => {
     .completed(proc => proc.start())
 
   await client.run()
-  server.run()
+  await server.run()
 })
 
 task('build', async context => {
@@ -135,6 +136,7 @@ task('build', async context => {
   server
     .bundle('server')
     .instructions(' > [server/index.js]')
+    .completed(proc => proc.exec())
 
   await client.run()
   server.run()
