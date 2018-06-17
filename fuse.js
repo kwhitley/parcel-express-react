@@ -1,29 +1,24 @@
+const { src, task, exec, context } = require('fuse-box/sparky')
 const {
   FuseBox,
   BabelPlugin,
-  HTMLPlugin,
   JSONPlugin,
   CSSPlugin,
-  CSSModules,
   CSSResourcePlugin,
   SassPlugin,
   LESSPlugin,
   WebIndexPlugin,
   UglifyJSPlugin,
-  QuantumPlugin,
-  Sparky
+  QuantumPlugin
 } = require('fuse-box')
 
-const isProduction = process.argv.slice(2).pop() === 'production'
-if (isProduction) {
-  console.log('BUILDING PRODUCTION MODE')
-}
-
-const fuse = FuseBox.init({
+const clientConfig = isProduction => ({
   homeDir: 'src',
   output: 'dist/$name.js',
-  // hash: isProduction,
+  hash: isProduction,
   debug: !isProduction,
+  sourceMaps: true,
+  // useJsNext: ['semantic-ui-react'],
   plugins: [
     BabelPlugin({
       config: {
@@ -39,98 +34,108 @@ const fuse = FuseBox.init({
     }),
     [
       SassPlugin(),
-      CSSPlugin({
-        group: 'styles.css',
-        outFile: 'dist/client/styles.css'
-      })
+      CSSPlugin()
     ],
     [
       LESSPlugin(),
       CSSPlugin()
     ],
     [
-      // 'node_modules.**css',
       CSSResourcePlugin({
-          dist: 'dist/client/assets',
-          resolve: (f) => `/assets/${f}`
+        dist: 'dist/assets',
+        resolve: (f) => `/assets/${f}`
       }),
-      CSSPlugin({
-        group: 'assets.css',
-        outFile: 'dist/client/assets.css'
-      })
+      CSSPlugin()
     ],
-    CSSPlugin({
-      group: 'app.css',
-      outFile: 'dist/client/app.css'
-    }),
+    CSSPlugin(),
     WebIndexPlugin({
       title: 'Fuse Box Demo',
-      target: 'client/index.html',
+      target: 'index.html',
       template: 'static/index.html',
-      bundles: ['client/vendor', 'client/app', ]
+      bundles: ['app', 'vendor']
+    }),
+    isProduction && QuantumPlugin({
+      manifest : true,
+      target: 'browser',
+      replaceTypeOf: false,
+      // treeshake: true,
+      uglify: true,
+      bakeApiIntoBundle: true,
+      css: {
+        clean: true
+      }
     })
-    // isProduction && UglifyJSPlugin()
   ]
 })
 
-fuse.dev({ port: 4445, httpServer: false })
-
-fuse
-  .bundle('client/vendor')
-  .target('browser')
-  .instructions('~ client/index.js')
-  .plugin(isProduction && QuantumPlugin({
-    uglify: true,
-    treeshake : true
-  }))
-
-const appBundle = fuse
-                    .bundle('client/app')
-                    .target('browser')
-                    .plugin(isProduction && QuantumPlugin({
-                      uglify: true,
-                      treeshake : true
-                    }))
-  // .plugin(
-  //   isProduction && CSSModules(),
-  //   isProduction && CSSPlugin({
-  //     group: 'app.css',
-  //     outFile: 'dist/app.css'
-  //   })
-  // )
-
-  if (!isProduction) {
-    appBundle
-      .watch('client/**')
-      .hmr()
-  }
-
-  appBundle.instructions('!> [client/index.js]')
-
-const serverBundle = fuse.bundle('server')
-    .watch('server/**') // watch only server related code.. bugs up atm
-    .instructions(' > [server/index.js]')
-    .plugin(JSONPlugin())
-    // Execute process right after bundling is completed
-    // launch and restart express
-
-if (!isProduction) {
-  serverBundle
-    .completed(proc => proc.start())
+const serverConfig = {
+  homeDir: 'src',
+  output: 'dist/$name.js',
+  debug: true,
+  sourceMaps: true,
+  plugins: [
+    BabelPlugin({
+      config: {
+        sourceMaps: true,
+        presets: [ 'env', 'react' ],
+        plugins: [
+          'transform-class-properties',
+          'transform-object-rest-spread',
+          'transform-function-bind',
+          'transform-runtime'
+        ],
+      },
+    }),
+    JSONPlugin(),
+  ]
 }
 
-// fuse.bundle('client/app')
-//     .target('browser')
-//     .plugin(
-//       isProduction && CSSModules(),
-//       isProduction && CSSPlugin({
-//         group: 'app.css',
-//         outFile: 'dist/app.css'
-//       })
-//     )
-//     .watch('client/**') // watch only client related code
-//     .hmr()
-//     .instructions(' > client/index.js')
+task('default', async context => {
+  await src('./dist')
+      .clean('dist/')
+      .exec()
+
+  const client = FuseBox.init(clientConfig(false))
+  const server = FuseBox.init(serverConfig)
+  client.dev({ port: 4445, httpServer: false })
+
+  client
+    .bundle('app')
+    .instructions(' > client/index.js')
+    .watch('src/client/**')
+    .hmr()
+
+  server
+    .bundle('server')
+    .instructions(' > [server/index.js]')
+    .watch('src/server/**')
+    .completed(proc => proc.start())
+
+  client.run()
+  server.run()
+})
+
+task('build', async context => {
+  await src('./dist')
+      .clean('dist/')
+      .exec()
+
+  const client = FuseBox.init(clientConfig(true))
+  const server = FuseBox.init(serverConfig)
+
+  client
+    .bundle('vendor')
+    .instructions('~ client/index.js')
+
+  client
+    .bundle('app')
+    .instructions('!> [client/index.js]')
 
 
-fuse.run()
+  server
+    .bundle('server')
+    .instructions(' > [server/index.js]')
+
+  client.run()
+  server.run()
+})

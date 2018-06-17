@@ -6,7 +6,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import path from 'path'
-const pkg = require('../package.json')
+import fs from 'fs'
+// const pkg = require('../package.json')
+
 
 // instantiate express
 const app = express()
@@ -35,8 +37,13 @@ app.get('/test', (req, res) =>
 
 // json import support
 app.get('/package.json', (req, res) => setTimeout(() => {
-  let chance = Math.random() > 0.4
-  chance && res.json(pkg) || res.status(403).send()
+  fs.readFile(path.join(__dirname, '../package.json'), 'utf8', function (err, data) {
+    if (err) throw err;
+    const pkg = JSON.parse(data)
+
+    let chance = Math.random() > 0.4
+    chance && res.json(pkg) || res.status(403).send()
+  })
 }, 1000))
 
 const serverPort = process.env.PORT || 3000
