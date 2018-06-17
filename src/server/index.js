@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
 
 // static serving from /dist/client
-const staticPath = path.join(__dirname, '../dist')
+const staticPath = path.join(__dirname, '../dist/client')
 console.log(`serving static content from ${staticPath}`)
 app.use(express.static(staticPath))
 // app.use('/client', express.static(staticPath))

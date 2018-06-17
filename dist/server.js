@@ -50,7 +50,7 @@ app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use((0, _compression2.default)());
 
 // static serving from /dist/client
-var staticPath = _path2.default.join(__dirname, '../dist');
+var staticPath = _path2.default.join(__dirname, '../dist/client');
 console.log('serving static content from ' + staticPath);
 app.use(_express2.default.static(staticPath));
 // app.use('/client', express.static(staticPath))

@@ -7,7 +7,7 @@ import { hot } from 'react-hot-loader'
 const App = () => {
   return (
     <div>
-      <h1>Parcel Test</h1>
+      <h1>Parcel Tester</h1>
       <Navigation />
       <div className="page-content">
         <Switch>

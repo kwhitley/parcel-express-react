@@ -9,9 +9,9 @@
     "clean": "rm -rf dist",
     "sandbox": "nodemon --watch ./client --exec babel-node ./client/state/demo.js",
     "predev": "rm -rf dist",
-    "dev": "node fuse.simple.js",
+    "dev": "node fuse",
     "prebuild": "rm -rf dist",
-    "build": "node fuse.simple.js build",
+    "build": "node fuse build",
     "dev:server": "nodemon --watch src/server src/server/index.js --exec babel-node"
   },
   "author": "",

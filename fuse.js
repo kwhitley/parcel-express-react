@@ -14,7 +14,7 @@ const {
 
 const clientConfig = isProduction => ({
   homeDir: 'src',
-  output: 'dist/$name.js',
+  output: 'dist/client/$name.js',
   hash: isProduction,
   debug: !isProduction,
   sourceMaps: true,
@@ -42,8 +42,8 @@ const clientConfig = isProduction => ({
     ],
     [
       CSSResourcePlugin({
-        dist: 'dist/assets',
-        resolve: (f) => `/assets/${f}`
+        dist: 'dist/client/assets/',
+        resolve: f => `/assets/${f}`
       }),
       CSSPlugin()
     ],
@@ -58,11 +58,11 @@ const clientConfig = isProduction => ({
       manifest : true,
       target: 'browser',
       replaceTypeOf: false,
-      // treeshake: true,
       uglify: true,
       bakeApiIntoBundle: true,
       css: {
-        clean: true
+        // clean: true,
+        compatibility: {}
       }
     })
   ]
@@ -111,7 +111,7 @@ task('default', async context => {
     .watch('src/server/**')
     .completed(proc => proc.start())
 
-  client.run()
+  await client.run()
   server.run()
 })
 
@@ -136,6 +136,6 @@ task('build', async context => {
     .bundle('server')
     .instructions(' > [server/index.js]')
 
-  client.run()
+  await client.run()
   server.run()
 })
