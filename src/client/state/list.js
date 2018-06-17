@@ -1,4 +1,4 @@
-import { Map, List, fromJS, Record } from 'immutable'
+import { fromJS, Record } from 'immutable'
 import { automap } from 'redux-automap'
 import { createSelector } from 'reselect'
 

@@ -38,7 +38,7 @@ app.get('/test', (req, res) =>
 // json import support
 app.get('/package.json', (req, res) => setTimeout(() => {
   fs.readFile(path.join(__dirname, '../package.json'), 'utf8', function (err, data) {
-    if (err) throw err;
+    if (err) throw err
     const pkg = JSON.parse(data)
 
     let chance = Math.random() > 0.4

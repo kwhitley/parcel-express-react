@@ -33,7 +33,7 @@ const store = createStore(
 )
 
 // history binding... messy, abstract elsewhere or turn into module
-history.listen((location, action) => {
+history.listen((location) => {
   let path = `${location.pathname}${location.search}${location.hash}`
   store.dispatch(route.actions.change(path))
 })

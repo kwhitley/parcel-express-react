@@ -1,7 +1,31 @@
 {
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "babel", "react"
+  ],
   "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "codeFrame": false,
+    "ecmaFeatures": {
+      "jsx": true,
+      "impliedStrict": true,
+      "globalReturn": false,
+      "experimentalObjectRestSpread": true
+    }
+  },
   "rules": {
-
+    "strict": 0,
+    "semi": ["error", "never"],
+    "curly": ["error", "multi"],
+    "react/prop-types": 1,
+    "react/jsx-uses-vars": 2,
+    "no-console": 0,
+    "react/jsx-no-undef": 0
   },
   "env": {
     "browser": true,

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { default as Navigation, routes } from './Nav'
 import { hot } from 'react-hot-loader'

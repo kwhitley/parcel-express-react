@@ -1,4 +1,4 @@
-import { fromJS, Record, List } from 'immutable'
+import { Record, List } from 'immutable'
 
 // initial state for reducer
 export const Group = new Record({

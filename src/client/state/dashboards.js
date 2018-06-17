@@ -1,7 +1,7 @@
-import { fromJS, Record } from 'immutable'
+import { fromJS } from 'immutable'
 import { automap } from 'redux-automap'
 import { createSelector } from 'reselect'
-import { Group, Tag, GroupedTag } from './dashboards.models'
+import { Group, GroupedTag } from './dashboards.models'
 
 export const namespace = 'dashboards'
 
@@ -14,7 +14,7 @@ const findGroup = (state, id) => state
                                 .get('groups')
                                 .find(group => group.get('id') === id)
 const getLastId = items => items.maxBy(i => i.get('id')).get('id')
-const getLastTagID = createSelector(getTags, getLastId)
+// const getLastTagID = createSelector(getTags, getLastId)
 const getLastGroupID = createSelector(getGroups, getLastId)
 
 export const selectors = {
@@ -58,15 +58,8 @@ export const actionReducers = [
       console.log('matched tag', tag.toJS())
       console.log('matched group', matchedGroup.toJS())
 
-      if (!tag) {
-        throw new Error(`no tag found with id=${tagID}`, action)
-        return state
-      }
-
-      if (!matchedGroup) {
-        throw new Error(`no group found with id=${groupID}`, action)
-        return state
-      }
+      if (!tag) throw new Error(`no tag found with id=${action.tagID}`, action)
+      if (!matchedGroup) throw new Error(`no group found with id=${action.groupID}`, action)
 
       return state
               .update('groups',

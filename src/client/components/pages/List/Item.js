@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, Icon, Table, Checkbox } from 'semantic-ui-react'
+import { Button, Table, Checkbox } from 'semantic-ui-react'
 import humanize from 'humanize-duration'
 
-export default ({ item, removeItem, toggleIsActive }) => {
+export const ListItem = ({ item, removeItem, toggleIsActive }) => {
   return (
     <Table.Row>
       <Table.Cell width={1}>
@@ -28,3 +28,4 @@ export default ({ item, removeItem, toggleIsActive }) => {
   )
 }
 
+export default ListItem

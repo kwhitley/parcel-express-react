@@ -11,6 +11,7 @@ const {
   UglifyJSPlugin,
   QuantumPlugin
 } = require('fuse-box')
+const ESLinter = require('fuse-box-eslint-plugin')
 
 const clientConfig = isProduction => ({
   homeDir: 'src',
@@ -19,8 +20,13 @@ const clientConfig = isProduction => ({
   debug: !isProduction,
   cache: false,
   sourceMaps: true,
-  // useJsNext: ['semantic-ui-react'],
   plugins: [
+    ESLinter({
+      pattern: /js(x)*$/,
+      eslint: {
+        useEslintrc: true
+      }
+    }),
     BabelPlugin({
       config: {
         sourceMaps: !isProduction,

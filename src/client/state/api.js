@@ -1,8 +1,8 @@
-import { Map, List, fromJS, Record } from 'immutable'
+import { fromJS, Record } from 'immutable'
 import { automap } from 'redux-automap'
 import { createSelector } from 'reselect'
 import axios from 'axios'
-import { call, put, takeLatest, delay } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 
 export const namespace = 'api'
 

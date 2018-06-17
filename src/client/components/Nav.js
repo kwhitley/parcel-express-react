@@ -13,7 +13,7 @@ export const routes = [
   { path: '/groups', name: 'Groups Demo', component: Groups },
 ]
 
-export default () =>
+export const Nav = () =>
   <Menu pointing secondary className="navigation">
     {
       routes.map(route => <Menu.Item
@@ -24,3 +24,5 @@ export default () =>
                           />)
     }
   </Menu>
+
+export default Nav

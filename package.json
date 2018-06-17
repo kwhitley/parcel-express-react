@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf dist",
     "dev": "node fuse",
-    "build": "node fuse build"
+    "build": "node fuse build",
+    "lint": "eslint src/client/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,7 +31,11 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-react": "^7.9.1",
     "fuse-box": "^3.2.2",
+    "fuse-box-eslint-plugin": "^0.0.3",
     "history": "^4.7.2",
     "humanize-duration": "^3.15.0",
     "immutable": "^3.8.2",

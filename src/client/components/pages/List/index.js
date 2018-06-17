@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fromImmutable } from 'react-wrappers'
-import { Button, Divider, Input, Table } from 'semantic-ui-react'
+import { Divider, Table } from 'semantic-ui-react'
 import Item from './Item'
 import AddItem from './AddItem'
 import list from '../../../state/list'
