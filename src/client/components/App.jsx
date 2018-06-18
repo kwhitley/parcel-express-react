@@ -5,7 +5,7 @@ import Navigation, { routes } from './Nav'
 
 const App = () =>
   <div>
-    <h1>Parcel Tester</h1>
+    <h1>Fuse Box Workflow Demo</h1>
     <Navigation />
     <div className="page-content">
       <Switch>

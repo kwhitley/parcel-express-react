@@ -16,7 +16,7 @@ const clientConfig = isProduction => ({
   output: 'dist/client/$name.js',
   hash: isProduction,
   debug: !isProduction,
-  cache: false,
+  cache: !isProduction,
   sourceMaps: true,
   useJsNext : ["antd"],
   plugins: [
