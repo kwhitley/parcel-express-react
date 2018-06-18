@@ -35,15 +35,21 @@ app.get('/test', (req, res) =>
 )
 
 // json import support
-app.get('/package.json', (req, res) => setTimeout(() => {
-  fs.readFile(path.join(__dirname, '../package.json'), 'utf8', (err, data) => {
-    if (err) throw err
+app.get('/package.json',
+  (req, res) => setTimeout(() => {
+    fs.readFile(
+      path.join(__dirname, '../package.json'),
+      'utf8',
+      (err, data) => {
+        if (err) throw err
 
-    const pkg = JSON.parse(data)
-    const chance = Math.random() > 0.4
+        const pkg = JSON.parse(data)
+        const chance = Math.random() > 0.4
 
-    (chance && res.json(pkg)) || res.status(403).send()
-  }) }, 1000)
+        return (chance && res.json(pkg)) || res.status(403).send()
+      }
+    )
+  }, 1000)
 )
 
 const serverPort = process.env.PORT || 3000

@@ -71,7 +71,9 @@ app.get('/package.json', function (req, res) {
       if (err) throw err;
 
       var pkg = JSON.parse(data);
-      var chance = Math.random() > 0.4(chance && res.json(pkg)) || res.status(403).send();
+      var chance = Math.random() > 0.4;
+
+      return chance && res.json(pkg) || res.status(403).send();
     });
   }, 1000);
 });

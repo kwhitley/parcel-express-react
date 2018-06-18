@@ -3,13 +3,13 @@ import { Menu } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 
 // pages
-import List from './pages/List'
-import Package from './pages/Package'
+import { ConnectedList } from './pages/List'
+import { ConnectedPackage } from './pages/Package'
 import Groups from './pages/Groups'
 
 export const routes = [
-  { path: '/list', name: 'List', component: List },
-  { path: '/package', name: 'Package', component: Package },
+  { path: '/list', name: 'List', component: ConnectedList },
+  { path: '/package', name: 'Package', component: ConnectedPackage },
   { path: '/groups', name: 'Groups Demo', component: Groups },
 ]
 

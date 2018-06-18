@@ -65,7 +65,7 @@ export const actionReducers = [
     }
   },
   {
-    toggleIsActive: (id) => ({ type:  'list/TOGGLE_ITEM_IS_ACTIVE', id }),
+    toggleIsActive: id => ({ type: 'list/TOGGLE_ITEM_IS_ACTIVE', id }),
     reducer: (state, action) => state.update('items', items => items.map(item => item.get('id') === action.id ? item.update('isActive', active => !active) : item))
   },
   {

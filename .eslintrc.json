@@ -31,6 +31,8 @@
     "object-curly-newline": [1, { "multiline": true, "minProperties": 5 }],
     "prefer-const": 1,
     "quote-props": [1, "consistent-as-needed"],
+    "react/forbid-prop-types": 1,
+    "react/jsx-closing-bracket-location": 1,
     "react/jsx-indent-props": 1,
     "react/jsx-wrap-multilines": [0],
     "space-infix-ops": 0,

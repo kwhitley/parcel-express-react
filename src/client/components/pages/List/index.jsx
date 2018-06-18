@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fromImmutable } from 'react-wrappers'
 import { Divider, Table } from 'semantic-ui-react'
@@ -6,7 +7,7 @@ import Item from './Item'
 import AddItem from './AddItem'
 import list from '../../../state/list'
 
-export const List = ({ items = [], addItem, removeItem, toggleIsActive }) =>
+const List = ({ items = [], addItem, removeItem, toggleIsActive }) =>
   <React.Fragment>
     <AddItem addItem={addItem} />
     <Divider horizontal>{ items.length } Items</Divider>
@@ -35,8 +36,17 @@ export const List = ({ items = [], addItem, removeItem, toggleIsActive }) =>
     </Table>
   </React.Fragment>
 
+List.propTypes = {
+  items: PropTypes.array.isRequired,
+  addItem: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
+  toggleIsActive: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = state => ({
   items: list.getItems(state)
 })
 
-export default connect(mapStateToProps, list.actions)(fromImmutable(List))
+export const ConnectedList = connect(mapStateToProps, list.actions)(fromImmutable(List))
+
+export default List

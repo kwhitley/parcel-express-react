@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Input, Form } from 'semantic-ui-react'
 
 class AddItem extends React.Component {
@@ -36,6 +37,10 @@ class AddItem extends React.Component {
       </Form>
     )
   }
+}
+
+AddItem.propTypes = {
+  addItem: PropTypes.func.isRequired
 }
 
 export default AddItem
