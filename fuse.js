@@ -51,7 +51,7 @@ const clientConfig = isProduction => ({
     WebIndexPlugin({
       title: 'Fuse Box Demo',
       target: 'index.html',
-      template: 'static/index.html',
+      template: 'src/client/index.html',
       bundles: ['app', 'vendor']
     }),
     isProduction && QuantumPlugin({
