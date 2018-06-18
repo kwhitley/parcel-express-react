@@ -8,7 +8,6 @@ const {
   SassPlugin,
   LESSPlugin,
   WebIndexPlugin,
-  UglifyJSPlugin,
   QuantumPlugin
 } = require('fuse-box')
 
@@ -68,7 +67,7 @@ const clientConfig = isProduction => ({
   ]
 })
 
-const serverConfig = {
+const serverConfig = isProduction => ({
   homeDir: 'src',
   output: 'dist/$name.js',
   debug: true,
@@ -88,7 +87,7 @@ const serverConfig = {
     }),
     JSONPlugin(),
   ]
-}
+})
 
 task('default', async context => {
   await src('./dist')
@@ -96,7 +95,7 @@ task('default', async context => {
       .exec()
 
   const client = FuseBox.init(clientConfig(false))
-  const server = FuseBox.init(serverConfig)
+  const server = FuseBox.init(serverConfig(false))
   client.dev({ port: 4445, httpServer: false })
 
   client
@@ -121,7 +120,7 @@ task('build', async context => {
       .exec()
 
   const client = FuseBox.init(clientConfig(true))
-  const server = FuseBox.init(serverConfig)
+  const server = FuseBox.init(serverConfig(true))
 
   client
     .bundle('vendor')
@@ -131,12 +130,11 @@ task('build', async context => {
     .bundle('app')
     .instructions('!> [client/index.jsx]')
 
-
   server
     .bundle('server')
     .instructions(' > [server/index.js]')
     .completed(proc => proc.exec())
 
   await client.run()
-  server.run()
+  await server.run()
 })

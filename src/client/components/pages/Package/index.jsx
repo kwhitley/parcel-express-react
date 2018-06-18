@@ -10,10 +10,10 @@ import api from '../../../state/api'
 const Package = ({ pkg, deps, devDeps, timesLoaded, loadPackageInfo }) =>
   <div className="package-loader">
     <Button fluid disabled={pkg.isLoading} onClick={loadPackageInfo} loading={pkg.isLoading}>
-      { deps && Object.keys(deps).length ? `Reload Package (loaded ${timesLoaded} times)` : 'Load Package' }
+      { deps.length ? `Reload Package (loaded ${timesLoaded} times)` : 'Load Package' }
     </Button>
-    { deps && <Dependencies deps={deps} devDeps={devDeps} /> }
-    { pkg.error && <ErrorMessage>{ pkg.error }</ErrorMessage> }
+    { deps.length > 0 && <Dependencies deps={deps} devDeps={devDeps} /> }
+    { pkg.error && <ErrorMessage message={pkg.error} /> }
   </div>
 
 Package.propTypes = {

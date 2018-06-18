@@ -1,0 +1,25 @@
+{
+  "css": {
+    "filename": "7a52df1a-styles.css",
+    "type": "css",
+    "hash": "7a52df1a",
+    "absPath": "/Users/kevinwhitley/dev/kwhitley/parcel-test/dist/client/7a52df1a-styles.css",
+    "webIndexed": true
+  },
+  "vendor": {
+    "fileName": "80af7363-vendor.js",
+    "hash": "80af7363",
+    "type": "js",
+    "absPath": "/Users/kevinwhitley/dev/kwhitley/parcel-test/dist/client/80af7363-vendor.js",
+    "webIndexed": true,
+    "relativePath": "80af7363-vendor.js"
+  },
+  "app": {
+    "fileName": "7c13887c-app.js",
+    "hash": "7c13887c",
+    "type": "js",
+    "absPath": "/Users/kevinwhitley/dev/kwhitley/parcel-test/dist/client/7c13887c-app.js",
+    "webIndexed": true,
+    "relativePath": "7c13887c-app.js"
+  }
+}
